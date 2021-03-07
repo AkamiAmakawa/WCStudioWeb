@@ -1,37 +1,86 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
 
-body{
-    background-image: url("background1.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
+html {
+  font-family: Helvetica, Arial , sans-serif;
+}
+
+#main {
 
 }
 
-h1{
-   text-align: center; 
-    padding: 20px;
-    color:rgb(45, 211, 233);
+#header {
+  height: 46px;
+  background-color: #000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
 }
 
-a:link {
-    color: green;
-    background-color: transparent;
-    text-decoration: none;
-  }
-  
-  a:visited {
-    color: pink;
-    background-color: transparent;
-    text-decoration: none;
-  }
-  
-  a:hover {
-    color: red;
-    background-color: transparent;
-    text-decoration: underline;
-  }
-  
-  a:active {
-    color: yellow;
-    background-color: transparent;
-    text-decoration: underline;
-  }
+#nav{
+  display: inline-block;
+}
+
+#nav > li {
+  display: inline-block;
+}
+
+#nav li{
+  position:relative;
+}
+
+#nav > li > a {
+  color: #fff;
+  text-transform: uppercase;
+}
+
+#nav li a {
+  text-decoration: none;
+  line-height: 46px;
+  padding: 0 24px;
+  display: block;
+}
+#nav > li:hover > a {
+  color: #000;
+  background-color: #ccc;
+}
+
+#slider {
+  position: relative;
+  margin-top: 46px;
+  padding-top: 50%;
+  background: url('./logo.png') top center / cover no-repeat;
+  /* background-color: #333; */
+}
+
+#slider .text-content {
+  position: absolute;
+  bottom: 47px;
+  color: #000;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+#slider .text-heading {
+  /* font-weight: 500; */
+  font-size: 24px;
+}
+
+#slider .text-decription{
+  font-size: 15px;
+  margin-top: 25px;
+}
+
+#content {
+
+}
+
+#footer {
+
+}
