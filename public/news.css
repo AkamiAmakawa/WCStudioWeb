@@ -28,6 +28,7 @@
   
   #nav > li {
     display: inline-block;
+    float: left;
   }
   
   #nav li{
@@ -49,12 +50,34 @@
     color: #000;
     background-color: #ccc;
   }
+
+  #header .home-btn{
+    float: right;
+    padding: 0 21px;
+
+}
+
+
+#header .home-btn:hover{
+    cursor: pointer;
+    background-color: #f44336;
+}
+
+
+#header .home-icon{
+    color: #fff;
+    font-size: 20px;
+    line-height: 46px;
+    /* right: 0;
+    top: 0; */
+}
   
   #slider {
     position: relative;
     margin-top: 46px;
     padding-top: 50%;
     background: url('./logo.png') top center / cover no-repeat;
+
     /* background-color: #333; */
   }
   
