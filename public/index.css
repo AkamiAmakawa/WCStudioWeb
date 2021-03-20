@@ -24,7 +24,7 @@ html {
   z-index: 3;
 }
 
-#nav {
+/* #nav {
   display: inline-block;
 }
 
@@ -66,6 +66,25 @@ html {
   font-size: 14px;
 }
 
+#nav .subnav{
+  display: none;
+  min-width: 160px;
+  top: 100%;
+  left: 0;
+  position: absolute;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0 ,0, 0.3);
+}
+
+#nav .subnav a {
+  color: #000;
+  padding: 0 12px;
+  line-height: 38px;
+}
+*/
+
+
+
 #header .search-btn{
   float: right;
   padding: 0 21px;
@@ -85,21 +104,7 @@ html {
   top: 0; */
 }
 
-#nav .subnav{
-  display: none;
-  min-width: 160px;
-  top: 100%;
-  left: 0;
-  position: absolute;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0 ,0, 0.3);
-}
 
-#nav .subnav a {
-  color: #000;
-  padding: 0 12px;
-  line-height: 38px;
-}
 
 #slider {
   position: relative;
