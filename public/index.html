@@ -7,30 +7,36 @@
     <title>Home Page</title>
     <link rel="stylesheet" href="./index.css" />
     <link rel="stylesheet" href="./fonts/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
   </head>
   <body>
     <div id="main">
       <div id="header">
-        <ul id="nav">
-          <li>
-            <a href="">
-              <i class="nav-home ti-home"></i>
-            </a>
-          </li>
-          <li>
-              <a href="">
-                  <i class="nav-arrow-down ti-angle-down"></i>
-              </a>
-              <ul class="subnav">
-                  <li><a href="">New</a></li>
-                  <li><a href="">Story</a></li>
-                  <li><a href="">Product</a></li>
-                  <li><a href="">Staff</a></li>
-                  <li><a href="">About</a></li>
-                  <li><a href="">New Article</a></li>
+        <nav class="navbar navbar-expand-md bg-transparent navbar-dark">
+          <a class="navbar-brand" href="#">TTStudio</a>
+
+          <!-- Toggler/collapsibe Button -->
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="navbar-content">
+              <ul class="nav navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="">New</a></li>
+                <li class="nav-item"><a class="nav-link" href="">Story</a></li>
+                <li class="nav-item"><a class="nav-link" href="">Product</a></li>
+                <li class="nav-item"><a class="nav-link" href="">Staff</a></li>
+                <li class="nav-item"><a class="nav-link" href="">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="">New Article</a></li>
               </ul>
-          </li>
-      </ul>
+            </div>
+        </nav>
+
 
       <div class="search-btn">
           <i class="search-icon ti-search"></i>
