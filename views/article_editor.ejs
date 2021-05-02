@@ -9,28 +9,34 @@
     <script src="/ckeditor/ckeditor.js"></script>
 </head>
 <body>
-    <form action="/post" method="post">
+    <div id="header">
 
-        <!-- id for editing -->
+        <%- include('./partials/navbar.ejs') %>
 
-        <input type="hidden" id = "article_id" name = "article_id" value = "<%= data.id %>"> 
+    </div>
+    <div id="editor">
+        <form action="/post" method="post">
 
-        <!-- category select-->
-        <label for = "category">Category: </label>
-        <select id = "category" name = "category">
-            <option value="news">News</option>
-            <option value="about">About</option>
-            <option value="story">Story</option>
-        </select>
-        
-        <br><br>
-        <!-- name input -->
-        <label for = "name">Name: </label>
-        <input type="text" id = "article_name" name = "article_name" required value = "<%= data.a_name %>">
+            <!-- id for editing -->
 
-        <br><br>
+            <input type="hidden" id = "article_id" name = "article_id" value = "<%= data.id %>"> 
 
-        <!-- content editor -->
+            <!-- category select-->
+            <label for = "category">Category: </label>
+            <select id = "category" name = "category">
+                <option value="news">News</option>
+                <option value="about">About</option>
+                <option value="story">Story</option>
+            </select>
+            
+            <br><br>
+            <!-- name input -->
+            <label for = "name">Name: </label>
+            <input type="text" id = "article_name" name = "article_name" required value = "<%= data.a_name %>">
+
+            <br><br>
+
+            <!-- content editor -->
         <textarea name="article_content" id="article_content"><%- data.content %></textarea>
 
         </textarea>

@@ -1,0 +1,10 @@
+#header {
+    position: static;
+    background-color: steelblue;
+    height: 46px;
+}
+
+#editor {
+    margin-top: 10px;
+    postion: relative;
+}
