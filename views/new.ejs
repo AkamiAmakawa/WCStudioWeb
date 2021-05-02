@@ -21,6 +21,9 @@
         </div>
     </div>
 
+<!-- edit/delete button     -->
+<a href="/edit_article/<%= data.id%>"><button>Edit</button></a>
+<button onclick="delConfirm()">Remove</button>
 
         <div id="content">
             <article>
@@ -41,6 +44,15 @@
         </div>
 
         
+        <!-- Script -->
+<script>
+  function delConfirm() {
+  if(confirm("Do you want to delete this article?")){
+    document.location.href = "/remove_article/<%= data.id %>";
+  }
+}
+</script>
+
 <!-- Footer -->
         <%- include("./partials/footer.ejs")%>;
 <!-- Footer -->

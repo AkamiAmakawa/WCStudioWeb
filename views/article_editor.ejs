@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WCS-New Article</title>
     <link rel="stylesheet" href="/css/article_editor.css">
-    <script src="https://cdn.ckeditor.com/ckeditor5/26.0.0/classic/ckeditor.js"></script>
+    <script src="/ckeditor/ckeditor.js"></script>
 </head>
 <body>
     <form action="/post" method="post">
@@ -31,16 +31,14 @@
         <br><br>
 
         <!-- content editor -->
-        <div contenteditable="true" id = "article_content" name = "article_content" ><%- data.content %></div>
+        <textarea name="article_content" id="article_content"><%- data.content %></textarea>
+
+        </textarea>
         <br>
         <p><input type="submit" value="Submit"></p>
     </form>
     <script>
-        ClassicEditor
-            .create( document.querySelector( '#article_content' ) )
-            .catch( error => {
-                console.error( error );
-            } );
+        CKEDITOR.replace('article_content')
     </script>
 </body>
 </html>

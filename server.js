@@ -26,7 +26,7 @@ db_process.connect;
 //Send data to MySQL Server
 
 app.post('/post', function(request, response){
-  if(!request.body.id){
+  if(request.body.id == 0){
     db_process.sendArticle(request.body.category, request.body.article_name, request.body.article_content);
   }
   else{
@@ -57,9 +57,22 @@ app.get('/new_article', (req,res) => {
 
 //Edit existing article
 
-app.get('/edit_article/:id',async (req, res) => {
+app.get('/edit_article/:id', async (req, res) => {
     var data = await db_process.getArticle(req.params.id);
     res.render("article_editor", {data: data[0]});
+})
+
+//Delete article
+
+app.get('/remove_article/:id', (req, res) => {
+  db_process.deleteArticle(req.params.id);
+  res.redirect('/');
+})
+
+//Show all news
+app.get('/news', async (req, res) =>{
+  var data = await db_process.getArticlesID("news", 1000, "desc");
+  res.render("news_list", {data: data});
 })
 
 // Route for everything else.

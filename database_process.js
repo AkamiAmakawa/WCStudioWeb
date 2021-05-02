@@ -20,18 +20,16 @@ exports.sendArticle = function (category, name, content) {
   //function to send article to database
     var date = moment.utc(new Date()).format("YYYY-MM-DD HH:mm:ss");
     command = `insert into articles(category, a_name, a_date, content) values (\'${category}\', \'${name}\', \'${date}\', \'${content}\');`;
-    console.log(command);
-    con.query(command, function (err, result, fields){
+    con.query(command, function (err){
         if(err) throw err;
-        console.log(fields);
     });
 };
 
 exports.editArticle = function (id, category, name, content) {
     command = `update articles set a_name = \'${name}\', category = \'${category}\', content = \'${content}\' where id = ${id}`;
-    con.query(command, function (err, result, fields){
+    console.log(command);
+    con.query(command, function (err){
       if(err) throw err;
-      console.log(fields);
   });
 }
 
@@ -79,4 +77,16 @@ exports.getArticle = async function (id) {
       resolve(rows);
     })
   })
+}
+
+//Delete an article from database
+
+exports.deleteArticle = function (id) {
+  command = `delete from articles where id = \'${id}\'`;
+  console.log(command);
+    con.query(command, function (err,rows) {
+      if(err) {
+        return reject(err);
+      }
+    })
 }
