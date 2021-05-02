@@ -131,6 +131,10 @@ html {
 
 #news {
   position: relative;
+  display: block;
+  overflow: hidden;
+  width: 800px;
+  margin: auto;
 }
 
 .news-title {
@@ -145,6 +149,8 @@ html {
   text-align: justify;
   line-height: 1.6;
 }
+
+
 
 #story {
   position: relative;
