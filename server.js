@@ -4,6 +4,7 @@ var logger = require('morgan');
 var app = express();
 var path = require('path');
 var db_process = require('./database_process');
+var moment = require('moment');
 const { cache } = require('ejs');
 // Log the requests
 app.use(logger('dev'));
@@ -33,8 +34,15 @@ app.post('/post', function(request, response){
 
 app.get('/news/:id',async (req,res) => {
   var data = await db_process.getArticle(req.params.id);
-  console.log(data);
-  res.render("new", {data: data});
+  if(!data.length){
+    res.sendStatus(404);
+  }
+  else{
+    console.log(data[0].a_date);
+    data[0].a_date.toUTCString();
+    data[0].a_date = moment(data[0].a_date).local().format("DD/MM/YYYY HH:mm");
+    res.render("new", {data: data});
+  }
 })
 app.get('/new_article', (req,res) => {
   res.render("article_editor");

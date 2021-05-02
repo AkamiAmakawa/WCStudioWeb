@@ -1,11 +1,12 @@
 var mysql = require('mysql');
 var moment = require('moment');
+const { utc } = require('moment');
 var con = mysql.createConnection({
   host: "db4free.net",
   user: "wcstudio",
   password: "wcstudio",
   database: "wcsarticles",
-  dateStrings:true
+  timezone : 'utc'
 });
 exports.connect = function () {
 con.connect(function(err) {
@@ -13,9 +14,10 @@ con.connect(function(err) {
   });
 }
 
+
 exports.sendArticle = function (category, name, content) {
   //function to send article to database
-    var date = moment().format('YYYY-MM-DD HH:mm:ss');
+    var date = moment.utc(new Date()).format("YYYY-MM-DD HH:mm:ss");
     command = `insert into articles(category, a_name, a_date, content) values (\'${category}\', \'${name}\', \'${date}\', \'${content}\');`;
     console.log(command);
     con.query(command, function (err, result, fields){
@@ -23,6 +25,15 @@ exports.sendArticle = function (category, name, content) {
         console.log(fields);
     });
 };
+
+exports.editArticle = function (id, category, name, content) {
+    command = `update articles set a_name = \'${name}\', category = \'${category}\', content = \'${content}\' where id = ${id}`;
+    con.query(command, function (err, result, fields){
+      if(err) throw err;
+      console.log(fields);
+  });
+}
+
 exports.getArticlesID = function (type, amount, sort) {
 /*Get a number of article from database
     type: type of articles to get
