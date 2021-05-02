@@ -26,7 +26,7 @@ db_process.connect;
 //Send data to MySQL Server
 
 app.post('/post', function(request, response){
-  if(request.body.id == 0){
+  if(request.body.article_id == 0){
     db_process.sendArticle(request.body.category, request.body.article_name, request.body.article_content);
   }
   else{
@@ -82,5 +82,5 @@ app.get('*', async function(req, res){
 });
 
 //Start server
-app.listen(3000);
+app.listen(80);
 console.log('Listening on port 80');
