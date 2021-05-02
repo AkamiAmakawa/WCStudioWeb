@@ -10,7 +10,12 @@
 </head>
 <body>
     <form action="/post" method="post">
-    <!-- category select     -->
+
+        <!-- id for editing -->
+
+        <input type="hidden" id = "article_id" name = "article_id" value = "<%= data.id %>"> 
+
+        <!-- category select-->
         <label for = "category">Category: </label>
         <select id = "category" name = "category">
             <option value="news">News</option>
@@ -21,12 +26,12 @@
         <br><br>
         <!-- name input -->
         <label for = "name">Name: </label>
-        <input type="text" id = "article_name" name = "article_name" required>
+        <input type="text" id = "article_name" name = "article_name" required value = "<%= data.a_name %>">
 
         <br><br>
 
-
-        <textarea id = "article_content" name = "article_content" ></textarea>
+        <!-- content editor -->
+        <div contenteditable="true" id = "article_content" name = "article_content" ><%- data.content %></div>
         <br>
         <p><input type="submit" value="Submit"></p>
     </form>

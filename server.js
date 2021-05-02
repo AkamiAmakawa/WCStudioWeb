@@ -4,14 +4,13 @@ var logger = require('morgan');
 var app = express();
 var path = require('path');
 var db_process = require('./database_process');
-var moment = require('moment');
 const { cache } = require('ejs');
 // Log the requests
 app.use(logger('dev'));
 
 //Change display to EJS
 app.set("view engine", "ejs");
-
+app.set('views', path.join(__dirname, 'views'));
 // Serve static files
 app.use(express.static(path.join(__dirname, 'public'))); 
 
@@ -24,34 +23,51 @@ app.use(express.json());
 //Connect to the database
 db_process.connect;
 
-// Access the parse results as request.body
+//Send data to MySQL Server
+
 app.post('/post', function(request, response){
+  if(!request.body.id){
     db_process.sendArticle(request.body.category, request.body.article_name, request.body.article_content);
+  }
+  else{
+    db_process.editArticle(request.body.article_id, request.body.category, request.body.article_name, request.body.article_content);
+  }
     response.redirect('/');
 });
 
 //Linking file and page
 
+//New display page
 app.get('/news/:id',async (req,res) => {
   var data = await db_process.getArticle(req.params.id);
   if(!data.length){
     res.sendStatus(404);
   }
   else{
-    console.log(data[0].a_date);
-    data[0].a_date.toUTCString();
-    data[0].a_date = moment(data[0].a_date).local().format("DD/MM/YYYY HH:mm");
-    res.render("new", {data: data});
+    res.render("new", {data: data[0]});
   }
 })
+
+//Create new article
+
 app.get('/new_article', (req,res) => {
-  res.render("article_editor");
+  var data = {id : "0", a_name : "", content: ""};
+  res.render("article_editor", {data: data});
 }) 
+
+//Edit existing article
+
+app.get('/edit_article/:id',async (req, res) => {
+    var data = await db_process.getArticle(req.params.id);
+    res.render("article_editor", {data: data[0]});
+})
+
 // Route for everything else.
-app.get('*', function(req, res){
-  res.render("index");
+app.get('*', async function(req, res){
+  var data = await db_process.getArticlesID("news", 3, "desc");
+  res.render("index", {data: data});
 });
 
-// Fire it up!
+//Start server
 app.listen(80);
 console.log('Listening on port 80');
