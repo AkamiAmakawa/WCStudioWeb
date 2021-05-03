@@ -4,6 +4,12 @@ var logger = require('morgan');
 var app = express();
 var path = require('path');
 var db_process = require('./database_process');
+
+// Variable for controlling news listing page
+//   current/total is the current/total page
+//   per_page is max number of articles per page
+//   max_show_page is the max number of page in pagination bar of each side for example 2 will be << 2 3 4 5 6 >> assume current page is 4
+var news_list_pagination = {current: 1, total: 1, per_page: 5, max_show_page: 2};
 const { cache } = require('ejs');
 // Log the requests
 app.use(logger('dev'));
@@ -37,8 +43,8 @@ app.post('/post', function(request, response){
 
 //Linking file and page
 
-//New display page
-app.get('/news/:id',async (req,res) => {
+//Article display page
+app.get('/a/:id',async (req,res) => {
   var data = await db_process.getArticle(req.params.id);
   if(!data.length){
     res.sendStatus(404);
@@ -70,9 +76,18 @@ app.get('/remove_article/:id', (req, res) => {
 })
 
 //Show all news
-app.get('/news', async (req, res) =>{
-  var data = await db_process.getArticlesID("news", 1000, "desc");
-  res.render("news_list", {data: data});
+
+app.get('/news/:page', async (req, res) =>{
+  news_list_pagination.current = req.params.page;
+  var totalArticles = await db_process.getArticlesID("news", 1000, "desc");
+  news_list_pagination.total = Math.ceil(totalArticles.length/news_list_pagination.per_page);
+  if(req.params.page > news_list_pagination.total || req.params.page < 1){
+    res.sendStatus(404);
+  }
+  var start_article = (news_list_pagination.current - 1) * news_list_pagination.per_page;
+  var end_article = start_article + news_list_pagination.per_page;
+  data = totalArticles.slice(start_article, end_article);
+  res.render("news_list", {data: data, pag: news_list_pagination});
 })
 
 // Route for everything else.
