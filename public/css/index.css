@@ -10,6 +10,10 @@ html {
   height: 100%;
 }
 
+#main {
+  background-color: burlywood;
+}
+
 
 #header {
   height: 46px;
@@ -100,8 +104,6 @@ html {
   /* right: 0;
   top: 0; */
 }
-
-
 
 #slider {
   position: relative;

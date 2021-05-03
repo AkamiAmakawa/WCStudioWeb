@@ -11,6 +11,7 @@
   #main {
     background: url('/image/body_background.jpg') top center / cover no-repeat;
     background-size: 100% 100%;
+    margin-bottom: 60px;
   }
   
   #header {
@@ -179,5 +180,7 @@
 }
 
   #footer {
+    position: relative;
+    bottom: 0%
   }
   
