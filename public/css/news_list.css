@@ -1,0 +1,53 @@
+#main{
+    background-image: url("/image/news_list_background.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-color:burlywood
+}
+
+#header {
+    background-color: black;
+    position: static;
+    height: 46px;
+}
+
+#news {
+    position: relative;
+    height: 950px;
+    padding-top: 100px;
+}
+
+.news-title {
+    font-size: 60px;
+    color: cornsilk;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: underline;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.newlist {
+    margin-top: 60px;
+    transform: translateX(+37%);
+}
+
+.newlist > .newli{
+    height: 150px;
+    text-transform: uppercase;
+}
+
+#main > nav {
+    left: 50%;
+    transform: translateX(-25%);
+}
+
+#footer {
+    position: relative;
+    width: 100%;
+    margin-top: 10px;
+    bottom: 0px;
+    color: #000;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}

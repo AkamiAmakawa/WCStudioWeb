@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>News</title>
-    <link rel="stylesheet" href="/css/news.css">
+    <link rel="stylesheet" href="/css/news_list.css">
     <link rel="stylesheet" href="/fonts/themify-icons/themify-icons.css">
 </head>
 
@@ -21,7 +21,7 @@
         <ul class="newlist">
           <% data.forEach(function (news) { %>
             <li class="newli"><a class="new-a" href="/a/<%= news.id %>">
-                <h3><%= news.a_name%></h3>
+                <h3 id="name"><%= news.a_name%></h3>
                 <span class="timepost"><%= news.a_date %></span>
             </a></li>
           <% }); %>
@@ -30,7 +30,7 @@
 
       
         <!-- Pagination -->
-
+      
         <nav aria-label="News list page navigation">
             <ul class = "pagination justify-content-end">
                 <% switch (parseInt(pag.current)) {
@@ -79,8 +79,6 @@
             </ul>
 
         </nav>
-        </div>
-
         <!-- Script -->
 <script>
   function delConfirm() {
@@ -90,9 +88,11 @@
 }
 </script>
 
+      <div id ="footer">
 <!-- Footer -->
-        <%- include("./partials/footer.ejs")%>;
+        <%- include("./partials/footer.ejs")%>
 <!-- Footer -->
+      </div>
     </div>
 </body>
 </html>
