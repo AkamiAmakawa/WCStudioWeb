@@ -16,10 +16,10 @@ con.connect(function(err) {
 }
 
 
-exports.sendArticle = function (category, name, content) {
+exports.sendArticle = function (category, author, name, content) {
   //function to send article to database
     var date = moment.utc(new Date()).format("YYYY-MM-DD HH:mm:ss");
-    command = `insert into articles(category, a_name, a_date, content) values (\'${category}\', \'${name}\', \'${date}\', \'${content}\');`;
+    command = `insert into articles(category, author, a_name, a_date, content) values (\'${category}\', \'${author}\', \'${name}\', \'${date}\', \'${content}\');`;
     con.query(command, function (err){
         if(err) throw err;
     });

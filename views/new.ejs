@@ -18,8 +18,12 @@
     </div>
 
 <!-- edit/delete button     -->
-<a href="/edit_article/<%= data.id%>"><button>Edit</button></a>
-<button onclick="delConfirm()">Remove</button>
+<%  hidden = "";
+ if (!user ||data.author != user.displayName) { 
+    hidden = "hidden";
+ } %>
+<a href="/edit_article/<%= data.id%>"><button class = "<%=hidden%>">Edit</button></a>
+<button onclick="delConfirm()" class = "<%=hidden%>">Remove</button>
 
         <div id="content">
             <article>
@@ -28,7 +32,7 @@
               </h1>
 
               <div class="userdetail">
-                <a href="https://www.facebook.com/thaianh.2611">Thai Duc Anh</a>
+                <a href="#"><%= data.author%></a>
 
                 <span>
                   <%= data.a_date %>

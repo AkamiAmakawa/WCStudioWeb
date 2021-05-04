@@ -127,9 +127,6 @@
     margin-top: 25px;
   }
   
-  #content {
-    /* background-color: #ccc; */
-  }
   
   article{
     background-color: #fff;
@@ -179,6 +176,9 @@
   cursor: pointer;
 }
 
+.hidden{
+  display: none;
+}
   #footer {
     position: relative;
     bottom: 0%

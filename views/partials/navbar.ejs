@@ -1,6 +1,7 @@
 <!-- Load bootstrap -->
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/navbar.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -23,7 +24,24 @@
           <li class="nav-item"><a class="nav-link" href="/product">Product</a></li>
           <li class="nav-item"><a class="nav-link" href="/staff">Staff</a></li>
           <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="/new_article">New Article</a></li>
         </ul>
+        <ul class="nav navbar-nav ml-sm-auto">
+          <% if(!user) { %>
+          <li class="nav-item"><a class ="nav-link" href="/login">Login</a></li>
+          <%} else { %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle userDisplay" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <%= user.displayName %>
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item align-content-lg-center" href="/new_article">New Article</a>
+                  <a class="dropdown-item align-content-lg-center" href="/logout">Logout</a>
+                </div>
+            </li>
+
+          <% } %>
+
+        </ul>
+
       </div>
   </nav>
