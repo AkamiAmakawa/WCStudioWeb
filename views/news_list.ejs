@@ -17,10 +17,10 @@
       </div>
 
       <div id="news">
-        <h3 class="news-title">News</h3>
+        <h3 class="news-title" style="text-shadow: 2px 2px 2px #000;">News</h3>
         <ul class="newlist">
           <% data.forEach(function (news) { %>
-            <li class="newli"><a class="new-a" href="/a/<%= news.id %>">
+            <li class="newli" style="list-style: none;"><a class="new-a" href="/a/<%= news.id %>" style="color: #fff;">
                 <h3 id="name"><%= news.a_name%></h3>
                 <span class="timepost"><%= news.a_date %></span>
             </a></li>
