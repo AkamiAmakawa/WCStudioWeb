@@ -13,7 +13,7 @@
 
 #news {
     position: relative;
-    height: 950px;
+    height: 850px;
     padding-top: 100px;
 }
 
@@ -27,18 +27,33 @@
 }
 
 .newlist {
-    margin-top: 60px;
-    transform: translateX(+37%);
+    display: block;
+    padding: 0;
+    float: left;
+    margin: 60px 100px 0 200px;
+    /* transform: translateX(+37%); */
+    width: 1000px;
 }
 
 .newlist > .newli{
+    display: block;
     height: 150px;
     text-transform: uppercase;
 }
 
+.newli #name{
+    display: block;
+    float: left;
+}
+
+.timepost{
+    display: block;
+    float: right;
+}
+
 #main > nav {
     left: 50%;
-    transform: translateX(-25%);
+    transform: translate(-45%,-20%);
 }
 
 #footer {
