@@ -104,7 +104,13 @@ app.post('/post', function(request, response){
     response.redirect('/');
 });
 
-//Linking file and page
+//                                          Linking file and page
+
+//Product page
+
+app.get("/product", (req, res) => {
+  res.render("product");
+})
 
 //Article display page
 app.get('/a/:id',async (req,res) => {
