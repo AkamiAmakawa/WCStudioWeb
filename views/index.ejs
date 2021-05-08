@@ -26,12 +26,15 @@
       <div id="news">
         <h3 class="news-title">News</h3>
         <ul class="newlist">
-          <% data.forEach(function (news) { %>
+          <%if(data){
+             data.forEach(function (news) { %>
             <li class="newli"><a class="new-a" href="/a/<%= news.id %>">
                 <h3><%= news.a_name%></h3>
-                <span class="timepost"><%= news.a_date %></span>
+                <span class="timepost"><%= news.createdAt %></span>
             </a></li>
-          <% }); %>
+          <% })}else { %>
+            <li class="newli"><p>It seem like nothing has been posted yet!</p></li>
+          <%  }; %>
         </ul>
       </div>
 

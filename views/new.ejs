@@ -19,7 +19,7 @@
 
 <!-- edit/delete button     -->
 <%  hidden = "";
- if (!user ||data.author != user.displayName) { 
+ if (!user || (data.authorId != user.id)) { 
     hidden = "hidden";
  } %>
 <a href="/edit_article/<%= data.id%>"><button class = "<%=hidden%>">Edit</button></a>
@@ -32,10 +32,10 @@
               </h1>
 
               <div class="userdetail">
-                <a href="#"><%= data.author%></a>
+                <a href="/user/<%=data.UserAccount.username %>"><%= data.UserAccount.userInfo.displayName%></a>
 
                 <span>
-                  <%= data.a_date %>
+                  <%= data.createdAt %>
                 </span>
               </div>
               <p><%- data.content %></p>

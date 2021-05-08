@@ -27,12 +27,13 @@
           <li class="nav-item"><a class="nav-link" href="/#about">About</a></li>
         </ul>
         <ul class="nav navbar-nav ml-sm-auto">
-          <% if(!user) { %>
+          <%
+            if(!user) { %>
           <li class="nav-item"><a class ="nav-link" href="/login" style="font-weight: bold; color: #fff;">Login <i class="fa fa-sign-in" aria-hidden="true"></i></a></li>
           <%} else { %>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle userDisplay" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-weight: bold; color: #fff;">
-                  <%= user.displayName %>
+                  <%= user.userInfo.displayName %>
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="navbarDropdownMenuLink">
                   <a class="dropdown-item align-content-lg-center" href="/new_article">New Article</a>

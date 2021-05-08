@@ -17,20 +17,23 @@
       </div>
 
       <div id="news">
-        <h3 class="news-title" style="text-shadow: 2px 2px 2px #000;">News</h3>
+        <h3 class="news-title">News</h3>
         <ul class="newlist">
-          <% data.forEach(function (news) { %>
-            <li class="newli" style="list-style: none;"><a class="new-a" href="/a/<%= news.id %>" style="color: #fff;">
-                <h3 id="name"><%= news.a_name%></h3>
-                <span class="timepost"><%= news.a_date %></span>
+          <%if(data){
+             data.forEach(function (news) { %>
+            <li class="newli"><a class="new-a" href="/a/<%= news.id %>">
+                <h3><%= news.a_name%></h3>
+                <span class="timepost"><%= news.createdAt %></span>
             </a></li>
-          <% }); %>
+          <% })}else { %>
+            <li class="newli"><p class="new-a">It seem like nothing has been posted yet!</p></li>
+          <%  }; %>
         </ul>
       </div>
 
       
         <!-- Pagination -->
-      
+
         <nav aria-label="News list page navigation">
             <ul class = "pagination justify-content-end">
                 <% switch (parseInt(pag.current)) {
@@ -75,24 +78,13 @@
                        <span class="sr-only">Next</span>
                       </a>
                 </li>
-
             </ul>
-
         </nav>
-        <!-- Script -->
-<script>
-  function delConfirm() {
-  if(confirm("Do you want to delete this article?")){
-    document.location.href = "/remove_article/<%= data.id %>";
-  }
-}
-</script>
+        </div>
 
-      <div id ="footer">
 <!-- Footer -->
-        <%- include("./partials/footer.ejs")%>
+        <%- include("./partials/footer.ejs")%>;
 <!-- Footer -->
-      </div>
     </div>
 </body>
 </html>
