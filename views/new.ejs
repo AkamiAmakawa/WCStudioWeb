@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News</title>
+    <link rel="stylesheet" href="/css/news.css">
+    <link rel="stylesheet" href="/fonts/themify-icons/themify-icons.css">
+</head>
+<body>
+    <div id="main">
+      <div id="header">
+        <%- include("./partials/navbar.ejs")%>
+      </div>
+
+      
+    </div>
+
+<!-- edit/delete button     -->
+<%  hidden = "";
+ if (!user ||data.author != user.displayName) { 
+    hidden = "hidden";
+ } %>
+<a href="/edit_article/<%= data.id%>"><button class = "<%=hidden%>">Edit</button></a>
+<button onclick="delConfirm()" class = "<%=hidden%>">Remove</button>
+
+        <div id="content">
+            <article>
+              <h1 class="titledetail">
+                <%= data.a_name %>
+              </h1>
+
+              <div class="userdetail">
+                <a href="#"><%= data.author%></a>
+
+                <span>
+                  <%= data.a_date %>
+                </span>
+              </div>
+              <p><%- data.content %></p>
+            </article>
+        </div>
+        </div>
+
+        
+        <!-- Script -->
+<script>
+  function delConfirm() {
+  if(confirm("Do you want to delete this article?")){
+    document.location.href = "/remove_article/<%= data.id %>";
+  }
+}
+</script>
+
+<!-- Footer -->
+        <%- include("./partials/footer.ejs")%>;
+<!-- Footer -->
+    </div>
+</body>
+</html>

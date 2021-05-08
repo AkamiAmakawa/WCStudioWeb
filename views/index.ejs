@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/fonts/themify-icons/themify-icons.css">
+
+  </head>
+  <body>
+    <div id="main">
+      <div id="header">
+
+        <%- include('./partials/navbar.ejs') %>
+
+      </div>
+      
+      <div id="slider">
+        <img class="Logo" src="/image/logo.png" alt="Logo" />
+        <p class="subtitle">Nếu như con người cần phải đổ máu để có được hòa bình, 
+          thì hãy biến chiến trường này trở thành thứ địa ngục ám ảnh nhất mà nhân loại từng chứng kiến!</p>
+      </div>
+
+      <div id="news">
+        <h3 class="news-title">News</h3>
+        <ul class="newlist">
+          <% data.forEach(function (news) { %>
+            <li class="newli"><a class="new-a" href="/a/<%= news.id %>">
+                <h3><%= news.a_name%></h3>
+                <span class="timepost"><%= news.a_date %></span>
+            </a></li>
+          <% }); %>
+        </ul>
+      </div>
+
+      <div id="story">
+        <h3 class="story-title">Story</h3>
+        <p class="story-summary">
+          Trong hàng thế kỷ, lục địa Equilibrium đã là nơi đóng chiếm của hai quốc gia.<br><br>
+          Mahou, vùng đất được thiên nhiên ban tặng cho một sinh khí dồi dào,
+            và con người ở đây đã học được cách sử dụng đươc ma thuật từ nguồn sinh khí đó. <br><br>
+          Teknika, được ca ngợi là nơi sản sinh ra những thiên tài lỗi lạc nhất trong lịch sử nhân
+            loại, và như một lẽ tất nhiên, sở hữu nền khoa học và công nghệ tiên tiến nhất thể giới. <br><br>
+          Cả hai quốc gia này cùng tồn tại và phát triển, và như tên gọi, 
+            khiến lục địa này luôn ở trạng thái cân bằng.<br><br>
+          Nhưng cho đến một ngày, tình báo của Teknika báo cáo về sự phát triển một công cụ
+            "có tiềm năng trở thành vũ khí hủy diệt hàng loạt." <br><br>
+          Teknika nhanh chóng đưa quân đội của mình để ngăn chặn mối nguy hiểm ngay trước mắt.
+            Và Mahou không thể nào có thể ngồi yên nhìn đất nước mình bị xâm chiếm được. <br><br>
+          Đây là câu chuyện mà nhân loại sẽ phải đi tìm kiếm lại sự cân bằng cho chính mình,
+            theo một cách tàn bạo và đau đớn nhất có thể.
+        </p>
+      </div>
+
+      <div id="staff">
+        <h3 class="staff-title">Staff</h3>
+        <p class="staff-description">
+          Director & Producer: HeRo3S<br>
+          Scenario writer: HeRo3S<br>
+          Game's level design: Daishi Arslan<br>
+          Web design: Thai Duc Anh<br>
+        </p>
+      </div>
+      <%- include('./partials/footer.ejs')%>
+
+    </div>
+  </body>
+</html>

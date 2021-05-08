@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WCS-New Article</title>
+    <link rel="stylesheet" href="/css/article_editor.css">
+    <script src="/ckeditor/ckeditor.js"></script>
+</head>
+<body>
+    <div id="header">
+
+        <%- include('./partials/navbar.ejs') %>
+
+    </div>
+    <div id="editor">
+        <form action="/post" method="post">
+
+            <!-- id for editing -->
+
+            <input type="hidden" id = "article_id" name = "article_id" value = "<%= data.id %>"> 
+            <input type ="hidden" id = "author" name = "author" value="<%= user.displayName%>">
+            <!-- category select-->
+            <label for = "category">Category: </label>
+            <select id = "category" name = "category">
+                <option value="news">News</option>
+                <option value="about">About</option>
+                <option value="story">Story</option>
+            </select>
+            
+            <br><br>
+            <!-- name input -->
+            <label for = "name">Name: </label>
+            <input type="text" id = "article_name" name = "article_name" required value = "<%= data.a_name %>">
+
+            <br><br>
+
+            <!-- content editor -->
+        <textarea name="article_content" id="article_content"><%- data.content %></textarea>
+
+        </textarea>
+        <br>
+        <p><input type="submit" value="Submit"></p>
+    </form>
+    <script>
+        CKEDITOR.replace('article_content')
+    </script>
+</body>
+</html>
