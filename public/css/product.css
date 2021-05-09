@@ -7,8 +7,43 @@
   margin-bottom: 30px;
   text-align: center;
   text-transform: uppercase;
+  text-shadow: 2px 2px 2px #ccc;
 }
 
 .col{
   height: 600px;
+}
+
+.col .h3{
+  margin: 5% 0;
+  text-align: center;
+}
+
+.col .image{
+  width: 90%;
+  margin: 5% 5%;
+  height: 300px;
+  display: block;
+}
+
+.col .button-purchase{
+  margin: 5% 40%;
+  padding: 12px 28px;
+  border-radius: 8px;
+  background-color: black;
+}
+
+.col .button-purchase:hover{
+  background-color: Gainsboro;
+}
+
+.purchase{
+  display: block;
+  text-decoration: none;
+  color: white;
+}
+
+.purchase:hover{
+  text-decoration: none;
+  color: #000;
 }
