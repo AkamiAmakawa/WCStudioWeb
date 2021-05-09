@@ -5,46 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product</title>
-    <link rel="stylesheet" href="./product.css">
-    <link rel="stylesheet" href="./fonts/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="/css/product.css">
+    <link rel="stylesheet" href="/fonts/themify-icons/themify-icons.css">
 </head>
 <body>
     <div id="main">
         <div id="header">
-            <ul id="nav">
-                <li>
-                    <a href="">
-                        <i class="nav-arrow-down ti-angle-down"></i>
-                    </a>
-                    <ul class="subnav">
-                        <li><a href="">New</a></li>
-                        <li><a href="">Story</a></li>
-                        <li><a href="">Product</a></li>
-                        <li><a href="">Staff</a></li>
-                        <li><a href="">About</a></li>
-                        <li><a href="">New Article</a></li>
-                    </ul>
-                </li>
-            </ul>
-
-            <div class="search-btn">
-                <i class="search-icon ti-search"></i>
-            </div>
+            <%- include('./partials/navbar.ejs') %>
         </div>
 
-        <div id="slider">
-            <div class="text-content">
-                <h2 class="text-heading">Trăng Tàn Studio</h2>
-                <div class="text-decription">Hút thuốc lá có thể gây ung thư phổi</div>
+        <div class="container-fluid">
+            <h1 id="product-title">Product</h3>
+            <div class="row">
+                <div class="col" style = background:linear-gradient(120DEG,#FFFFFF,#000080)>Playstation</div>
+                <div class="col" style = background:linear-gradient(120DEG,#00ADEE,#000000)>Steam</div>
+                <div class="col" style = background:linear-gradient(120DEG,#52b043,#FFFFFF)>Xbox</div>
             </div>
-        </div>
-
-        <div id="content">
-
         </div>
 
         <div id="footer">
-
+            <%- include("./partials/footer.ejs")%>
         </div>
     </div>
 </body>

@@ -89,7 +89,7 @@ app.post('/post', function(request, response){
 //Product page
 
 app.get("/product", (req, res) => {
-  res.render("product");
+  res.render("product", {user: req.session.user});
 })
 
 //Article display page
