@@ -1,4 +1,4 @@
-const { DataTypes } = require("sequelize")
+const { DataTypes, where } = require("sequelize")
 var db_sequelize = require("./db_sequelize")
 var bcrypt = require('bcrypt');
 const { afterCreate, findOne } = require("./user_info");
@@ -29,12 +29,23 @@ var UserAccount = db_sequelize.define('UserAccount', {
 }, {
     hooks: {
       beforeCreate: (user) => {
-        if(findOne({where: {username: user.username}})){
-            throw new Error ("Username already exist!");
-        } 
-        if(findOne({where: {email: user.email}})){
-            throw new Error ("Email already exist!");
-        } 
+
+        //Check email duplicate
+        findOne({where: {email : user.email}}).then((result) => {
+            if(result){
+                throw new Error('Email already exist')
+            }
+        })
+
+        //Check username duplicate
+
+        findOne({where: {username : user.username}}).then((result) => {
+            if(result){
+                throw new Error('Username already exist')
+            }
+        })
+
+        //Encrypt the password
         const salt = bcrypt.genSaltSync();
         user.password = bcrypt.hashSync(user.password, salt);
       },

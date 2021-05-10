@@ -160,7 +160,7 @@ app.get('/news/:page', async (req, res) =>{
 
 // Route for everything else.
 app.get('*', async function(req, res){
-  var data = await db_process.getArticlesID("news", 3, "desc");
+  var data = await db_process.getArticlesID("news", 3, "asc");
   res.render("index", {data: data,user: req.session.user});
 });
 

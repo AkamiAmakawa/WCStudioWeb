@@ -36,8 +36,8 @@ var sessionChecker = (req, res, next) => {
          password: req.body.password,
      })
      .then(user => {
-         req.session.user = user.dataValues;
-         res.redirect('/');
+         loginMsg = "Register successfully please login to continues";
+         res.redirect('/login');
      })
      .catch(error => {
         console.log(error);
