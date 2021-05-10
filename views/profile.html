@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script>
+        $(function(){
+           $('.datepicker').datepicker({
+              format: 'mm-dd-yyyy'
+            });
+        });
+        </script>
+</head>
+<body>
+    <div id="main">
+        <div id="header">
+            <%- include('./partials/navbar.ejs') %>
+        </div>
+
+        <div class="container-fluid">
+            <h1>Profile</h1>
+
+            <div class="row" id="working-space">
+                <div class="col" id="avatar">
+                    <img src="/image/ps.png" alt="Avatar" class="rounded-circle">
+                </div>
+                <div class="col" id="read-only-info">
+                    <div class="row">
+                        <h3>Email:</h3>
+                        <p>HeRo3S</p>
+                    </div>
+                    <div class="row">
+                        <h3>ID</h3>
+                        <p>#1111111</p>
+                    </div>   
+                </div>
+                <div class="col" id="updatable-info">
+                    <div class="form-group">
+                        <label for="usr">Username:</label>
+                        <input type="text" class="form-control" id="usr">
+                      </div>
+                      <div class="form-group">
+                        <label for="dob">Date Of Birth:</label>
+                        <input type="text" class="form-control datepicker" id="dob">
+                      </div>
+                </div>
+            </div>
+
+            <div class="row" id="description">
+                <label for="des">Description:</label>
+                <input type="text" class="form-control" id="des">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+
+        </div>
+
+        <div id="footer">
+            <%- include("./partials/footer.ejs")%>
+        </div>
+    </div>
+</body>
+</html>
