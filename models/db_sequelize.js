@@ -1,16 +1,15 @@
 const { Sequelize } = require("sequelize");
-require("dotenv").config();
 var sequelize = require("sequelize");
 module.exports = new Sequelize({
     dialect: "mysql",
     storage: "database/db.mysql",
-    host: "db4free.net",
-    username: "wcstudio",
-    password: "wcstudio",
-    database: "wcsarticles",
+    host:  process.env.HOST,
+    username: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DATABASE,
     pool: {
-        max: 20,
-        min: 0,
+        max: 10,
+        min: 1,
         acquire: 60000,
         idle: 10000
       }

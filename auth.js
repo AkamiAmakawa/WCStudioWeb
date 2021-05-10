@@ -7,7 +7,8 @@ const express = require("express");
 const router = express.Router();
 const UserAccount = require("./models/user");
 const UserInfo = require("./models/user_info");
-var serverMsg;
+var loginMsg = "";
+var regMsg = "";
  require("dotenv").config();
 
 //Session 
@@ -26,9 +27,9 @@ var sessionChecker = (req, res, next) => {
 
  router.route('/register')
  .get(sessionChecker, (req, res) => {
-     res.render("auth", {response : serverMsg});
- })
- .post((req, res) => {
+     res.render("register", {response : regMsg});
+ }).post(async (req, res) => {
+  console.log(req.body.username);
      UserAccount.create({
          username: req.body.username,
          email: req.body.email,
@@ -40,26 +41,25 @@ var sessionChecker = (req, res, next) => {
      })
      .catch(error => {
         console.log(error);
-        serverMsg = error;
-         res.redirect('/register');
+        regMsg = error.message;
+         res.redirect("/register");
      });
  });
 
 router.route('/login').get((req, res) => {
-  serverMsg = "";
-  res.render('login', {response : serverMsg});
+  res.render('login', {response : loginMsg});
 }).post((req,res) => {
   var email = req.body.email;
   var password = req.body.password;
   UserAccount.findOne({where: {email : email}, include: UserInfo})
   .then(async function (user){
       if(!user){
-        serverMsg = "Incorrect email or password";
-        res.render('login', {response : serverMsg});
+        loginMsg = "Incorrect email or password";
+        res.render('login', {response : loginMsg});
       }
       else if(!user.validPassword(user, password)){
-        serverMsg = "Incorrect email or password";
-        res.render('login', {response : serverMsg});
+        loginMsg = "Incorrect email or password";
+        res.render('login', {response : loginMsg});
       }
       else{
         req.session.user = user.toJSON();

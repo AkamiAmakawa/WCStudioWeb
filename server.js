@@ -1,5 +1,5 @@
 //Require module
-
+require("dotenv").config();
 var path = require('path');
 var express = require('express');
 var logger = require('morgan');
@@ -7,9 +7,7 @@ var app = express();
 var session = require('express-session');
 const passport = require("passport");
 const authRouter = require("./auth");
-const Association = require("./models/association");
 var db_process = require('./article_process');
-require("dotenv").config();
 
 // Variable for controlling news listing page
 //   current/total is the current/total page
