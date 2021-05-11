@@ -42,6 +42,16 @@
             </article>
         </div>
 
+        <div class="btn-group dropup">
+          <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Setting
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a href="/edit_article/<%= data.id%>"><button class = "dropdown-item <%=hidden%>">Edit</button></a>
+            <button onclick="delConfirm()" class = "dropdown-item <%=hidden%>">Remove</button>
+          </div>
+        </div>
+
         <div class="container-fluid">
           <h4>Comment section</h4>
           <ul class="list-group" id="posted-comment">
