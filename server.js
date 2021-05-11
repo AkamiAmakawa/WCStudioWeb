@@ -7,7 +7,7 @@ var app = express();
 var session = require('express-session');
 const passport = require("passport");
 const authRouter = require("./auth");
-const dotenv = require('dotenv').config();
+dotenv = require('dotenv').config();
 var db_process = require('./article_process');
 
 // Variable for controlling news listing page
