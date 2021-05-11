@@ -7,6 +7,7 @@ var app = express();
 var session = require('express-session');
 const passport = require("passport");
 const authRouter = require("./auth");
+const dotenv = require('dotenv').config();
 var db_process = require('./article_process');
 
 // Variable for controlling news listing page
@@ -41,7 +42,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //Test the connection
 
 // Parse URL-encoded bodies (as sent by HTML forms)
-app.use(express.urlencoded());
+app.use(express.urlencoded( {extended: true} ));
 
 //Cookie parser
 

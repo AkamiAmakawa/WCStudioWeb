@@ -23,48 +23,6 @@
     right: 0;
     z-index: 3;
   }
-/*   
-  #nav {
-    display: inline-block;
-}
-
-  #nav, .subnav{
-    list-style-type: none;
-}
-
-  #nav > li {
-    display: inline-block;
-  }
-
-#nav li{
-    position:relative;
-}
-
-#nav li:hover .subnav{
-    display: block;
-}
-
-#nav > li > a {
-    color: #fff;
-    text-transform: uppercase;
-}
-
-#nav li a {
-    text-decoration: none;
-    line-height: 46px;
-    padding: 0 24px;
-    display: block;
-}
-
-#nav .subnav li:hover a,
-#nav > li:hover > a {
-    color: #000;
-    background-color: #ccc;
-}
-
-#nav .nav-arrow-down{
-    font-size: 14px;
-} */
 
 #header .search-btn{
     float: right;
