@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
+    <link rel="stylesheet" href="/public/css/profile.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -25,25 +26,21 @@
         </div>
 
         <div class="container-fluid">
-            <h1>Profile</h1>
+            <h1 style="text-align: center;">Profile</h1>
 
             <div class="row" id="working-space">
-                <div class="col" id="avatar">
-                    <img src="/image/ps.png" alt="Avatar" class="rounded-circle">
+                <div class="col-4" id="avatar">
+                    <img src="/public/image/avatar.png" alt="Avatar" class="rounded-circle">
                 </div>
-                <div class="col" id="read-only-info">
-                    <div class="row">
-                        <h3>Email:</h3>
-                        <p>HeRo3S</p>
-                    </div>
-                    <div class="row">
-                        <h3>ID</h3>
-                        <p>#1111111</p>
-                    </div>   
+                <div class="col-3" id="read-only-info">
+                    <div class="row" id="email"><h4>Email</h4></div>
+                    <div class="row" id="email-content">Herro</div>
+                    <div class="row" id="id"><h4>ID</h4></div>   
+                    <div class="row" id="id-content"><p>#111111111</p></div>
                 </div>
-                <div class="col" id="updatable-info">
+                <div class="col-5" id="updatable-info">
                     <div class="form-group">
-                        <label for="usr">Username:</label>
+                        <label for="usr" style="margin-top: 8px;">Username:</label>
                         <input type="text" class="form-control" id="usr">
                       </div>
                       <div class="form-group">
@@ -54,11 +51,11 @@
             </div>
 
             <div class="row" id="description">
-                <label for="des">Description:</label>
-                <input type="text" class="form-control" id="des">
+                <label for="des" style="font-weight: bold; font-size: 20px; margin: 4px;">Description:</label>
+                <textarea name="des" id="des" cols="30" rows="10"></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary" id="submit">Submit</button>
 
         </div>
 
