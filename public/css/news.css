@@ -141,4 +141,11 @@
     position: relative;
     bottom: 0%
   }
+
+  .dropup{
+    float: right;
+    position: sticky;
+    bottom: 20px;
+    right: 50px;
+  }
   
