@@ -7,7 +7,7 @@ var app = express();
 var session = require('express-session');
 const passport = require("passport");
 const authRouter = require("./auth");
-dotenv = require('dotenv').config();
+const userRouter = require("./user_manager");
 var db_process = require('./article_process');
 
 // Variable for controlling news listing page
@@ -17,6 +17,8 @@ var db_process = require('./article_process');
 var news_list_pagination = {current: 1, total: 1, per_page: 4, max_show_page: 2};
 const { cache } = require('ejs');
 const cookieParser = require('cookie-parser');
+const Article = require("./models/articles");
+const Comment = require("./models/comment");
 
 
 
@@ -71,6 +73,7 @@ app.use((req, res, next) => {
 
 
 app.use("/", authRouter);
+app.use("/", userRouter);
 //Send data to MySQL Server
 
 app.post('/post', function(request, response){
@@ -98,7 +101,8 @@ app.get('/a/:id',async (req,res) => {
     res.sendStatus(404);
   }
   else{
-    res.render("new", {data: data, user: req.session.user});
+    var comment = await db_process.getComment(req.params.id);
+    res.render("news", {data: data, user: req.session.user, commentList : comment});
   }
 })
 
@@ -117,18 +121,34 @@ app.get('/new_article', (req,res) => {
 //Edit existing article
 
 app.get('/edit_article/:id', async (req, res) => {
-  if(!req.user){
+  var article = await Article.findByPk(req.params.id, {attributes: ['authorId']});
+  console.log(article);
+  if(!req.session.user || req.session.user.id != article.authorId){
     res.redirect("/");
   }
   else{
     var data = await db_process.getArticle(req.params.id);
-    if(!data.length){
+    if(!data){
       res.sendStatus(404);
     }else{
-    res.render("article_editor", {data: data[0],user: req.session.user});
+    res.render("article_editor", {data: data,user: req.session.user});
     }
   }
 })
+
+//Post comment
+
+app.post('/a/:id', (req, res) => {
+  Comment.create({
+    authorId: req.body.authorId,
+    articleId: req.body.articleId,
+    content: req.body.comment,
+  }).then(() => {
+    res.redirect("/a/" + req.body.articleId);
+  }).catch(error =>{
+    console.log(error);
+  })
+  })
 
 //Delete article
 
@@ -141,7 +161,7 @@ app.get('/remove_article/:id', (req, res) => {
 
 app.get('/news/:page', async (req, res) =>{
   news_list_pagination.current = req.params.page;
-  var totalArticles = await db_process.getArticlesID("news", 1000, "desc");
+  var totalArticles = await db_process.getArticlesID("news", 1000, "DESC");
   var data;
   //If there are no data
   if(!totalArticles){
@@ -161,7 +181,7 @@ app.get('/news/:page', async (req, res) =>{
 
 // Route for everything else.
 app.get('*', async function(req, res){
-  var data = await db_process.getArticlesID("news", 3, "asc");
+  var data = await db_process.getArticlesID("news", 3, "DESC");
   res.render("index", {data: data,user: req.session.user});
 });
 

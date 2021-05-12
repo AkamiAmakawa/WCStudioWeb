@@ -15,6 +15,12 @@ var UserInfo = db_sequelize.define('userInfo', {
     permissionLevel: {
         type: DataTypes.INTEGER,
         defaultValue: 1,
+    },
+    date_of_birth: {
+        type: DataTypes.DATEONLY,
+    },
+    description: {
+        type: DataTypes.TEXT,
     }
 })
 module.exports = UserInfo;

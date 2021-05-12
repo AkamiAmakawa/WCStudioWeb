@@ -46,21 +46,38 @@
           <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Setting
           </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a href="/edit_article/<%= data.id%>"><button class = "dropdown-item <%=hidden%>">Edit</button></a>
-            <button onclick="delConfirm()" class = "dropdown-item <%=hidden%>">Remove</button>
+          <div class="dropdown-menu <%= hidden %>" aria-labelledby="dropdownMenuButton">
+            <a href="/edit_article/<%= data.id%>"><button class = "dropdown-item">Edit</button></a>
+            <button onclick="delConfirm()" class = "dropdown-item">Remove</button>
           </div>
         </div>
 
         <div class="container-fluid">
-          <h4>Comment section</h4>
+          <h3>Comment section</h3>
           <ul class="list-group" id="posted-comment">
 
           </ul>
+          <% if (user){ %>
           <div class="form-group">
-            <input type="text" class="form-control" id="my-comment" placeholder="Say something!">
+            <form action="/a/<%= data.id %>" method="POST">
+            <input type="hidden" name = "articleId" id="articleId" value="<%= data.id%>">    
+            <input type="hidden" name = "authorId" id="authorId" value="<%= user.id%>">   
+            <input type="text" class="form-control" name="comment" id="comment" placeholder="Say something!">
           </div>
           <button type="submit" class="btn btn-outline-primary" id="submit-button">Submit</button>
+        </form>
+        <%} %>
+
+                
+        <% commentList.forEach(comment => { %>
+            <div class="text-justify darker mt-4 float-right"> <img src="https://i.imgur.com/CFpa3nK.jpg" alt="" class="rounded-circle" width="40" height="40">
+                    <a href="/user/<%=comment.UserAccount.username%>">
+                      <%= comment.UserAccount.userInfo.displayName %>
+                      <a> <span>- <%= comment.createdAt%></span> <br>
+                    <p><%=comment.content%></p>
+                </div>
+          <%}); %>
+          </ul>
         </div>
 
         

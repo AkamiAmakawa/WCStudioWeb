@@ -1,9 +1,9 @@
-const { DataTypes, where } = require("sequelize")
+const { DataTypes} = require("sequelize")
 var db_sequelize = require("./db_sequelize")
 var bcrypt = require('bcrypt');
-const { afterCreate, findOne } = require("./user_info");
 const UserInfo = require("./user_info");
-const Article = require("./articles")
+const Article = require("./articles");
+const Comment = require("./comment");
 var UserAccount = db_sequelize.define('UserAccount', {
     id: {
         type: DataTypes.INTEGER,
@@ -16,11 +16,35 @@ var UserAccount = db_sequelize.define('UserAccount', {
         type: DataTypes.STRING,
         allowNull : false,
         unique: true,
+        validate:{
+            customValidation(value,next){
+                UserAccount.findAll({attributes: ['id'], where: {email : value,}}).then((result) => {
+                    if(result){
+                        return next(new Error('Email already exist'));
+                    }
+                    else{
+                        return next();
+                    }
+                }) 
+            }
+        }  
     },
     username: {
         type: DataTypes.STRING,
         allowNull : false,
         unique: true,
+        validate:{
+            customValidation(value,next){
+                UserAccount.findAll({attributes: ['id'], where: {username : value,}}).then((result) => {
+                    if(result){
+                        return next(new Error('Username already exist'));
+                    }
+                    else{
+                        return next();
+                    }
+                }) 
+            }
+        } 
     },
     password: {
         type: DataTypes.STRING,
@@ -29,22 +53,7 @@ var UserAccount = db_sequelize.define('UserAccount', {
 }, {
     hooks: {
       beforeCreate: (user) => {
-
-        //Check email duplicate
-        findOne({where: {email : user.email}}).then((result) => {
-            if(result){
-                throw new Error('Email already exist')
-            }
-        })
-
-        //Check username duplicate
-
-        findOne({where: {username : user.username}}).then((result) => {
-            if(result){
-                throw new Error('Username already exist')
-            }
-        })
-
+          
         //Encrypt the password
         const salt = bcrypt.genSaltSync();
         user.password = bcrypt.hashSync(user.password, salt);
@@ -66,6 +75,7 @@ UserAccount.prototype.validPassword = (user, password) =>{
     }
 };
 
+
 UserAccount.hasOne(UserInfo, {
         foreignKey: {
             name: 'id'
@@ -86,5 +96,12 @@ Article.belongsTo(UserAccount, {
         name: 'authorId'
     }
 });
+UserAccount.hasMany(Comment, {
+    foreignKey: "authorId",
+})
+Comment.belongsTo(UserAccount, {
+    foreignKey: "authorId",
+})
+// db_sequelize.sync({alter: true});
 // export User model for use in other files.
 module.exports = UserAccount;

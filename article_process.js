@@ -2,6 +2,7 @@ const Article = require("./models/articles");
 const UserAccount = require("./models/user");
 const UserInfo = require("./models/user_info");
 const moment = require('moment');
+const Comment = require("./models/comment");
 exports.sendArticle = async function (category, author, name, content) {
   //function to send article to database
     await Article.create({
@@ -27,29 +28,15 @@ exports.getArticlesID = async function (category, amount, sort) {
     sort: asc/desc get the articles by ascending/descending id
 */
     var raw_data = await Article.findAll({
-      attributes: ['id', 'a_name', 'createdAt']
-    }, {
+      attributes: ['id', 'a_name', 'createdAt'],
       where :{
         category : category,
-      }
-    },{
-      limit : amount,
-    },{
-      order:[
-        ['id', sort]
-      ],
-    }, {include: [
-      {
-        model: UserAccount,
-        attributes: ['username'],
-        include: [
-          {
-            model: UserInfo,
-            attributes: ['displayName'],
-          },
-        ],
       },
-    ],},);
+      order:[
+        ['createdAt', sort],
+      ],
+      limit : amount,
+    });
     var data = [];
     for(sub of raw_data){
       sub = sub.toJSON();
@@ -57,7 +44,6 @@ exports.getArticlesID = async function (category, amount, sort) {
       sub.createdAt = moment(sub.createdAt).local().format("DD/MM/YYYY HH:mm");
       data.push(sub);
     }
-    console.log(data);
     return data;
   }
 
@@ -106,4 +92,31 @@ exports.deleteArticle = function (id) {
       id : id
     }
   })
+}
+
+exports.getComment = async function (id) {
+  var raw_data = await Comment.findAll({
+    where:{
+      articleId: id,
+    }, include: [
+      {
+        model: UserAccount,
+        attributes: ['username'],
+        include: [
+          {
+            model: UserInfo,
+            attributes: ['displayName'],
+          },
+        ],
+      },
+    ]
+  })
+  var data = [];
+  for(sub of raw_data){
+    sub = sub.toJSON();
+    sub.createdAt.toUTCString();
+    sub.createdAt = moment(sub.createdAt).local().format("DD/MM/YYYY HH:mm");
+    data.push(sub);
+  }
+  return data;
 }

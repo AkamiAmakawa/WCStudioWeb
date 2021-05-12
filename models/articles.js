@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
+var Comment = require("./comment");
 var db_sequelize = require('./db_sequelize');
-const UserAccount = require('./user');
 var Article = db_sequelize.define("Article", {
     id: {
         type: DataTypes.INTEGER,
@@ -25,10 +25,11 @@ var Article = db_sequelize.define("Article", {
         allowNull: false,
     }
 })
-// UserAccount.associate = function associate({Article}) {
-//     return UserAccount.hasMany(Article, {
-//         foreignKey : 'authorId',
-//       });
-  
-// };
+
+Article.hasMany(Comment, {
+    foreignKey: 'articleId',
+})
+Comment.belongsTo(Article, {
+    foreignKey: 'articleId',
+})
 module.exports = Article;

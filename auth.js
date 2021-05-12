@@ -7,8 +7,8 @@ const express = require("express");
 const router = express.Router();
 const UserAccount = require("./models/user");
 const UserInfo = require("./models/user_info");
-var loginMsg = "";
-var regMsg = "";
+var loginMsg = [];
+var regMsg = [];
  require("dotenv").config();
 
 //Session 
@@ -27,27 +27,30 @@ var sessionChecker = (req, res, next) => {
 
  router.route('/register')
  .get(sessionChecker, (req, res) => {
-     res.render("register", {response : regMsg});
+     res.render("register", {response : regMsg, user: req.session.user});
  }).post(async (req, res) => {
-  console.log(req.body.username);
      UserAccount.create({
          username: req.body.username,
          email: req.body.email,
          password: req.body.password,
      })
-     .then(user => {
+     .then(() => {
          loginMsg = "Register successfully please login to continues";
          res.redirect('/login');
      })
      .catch(error => {
+        JSON.stringify(error);
         console.log(error);
-        regMsg = error.message;
+        regMsg = [];
+        error.errors.forEach(err => {
+          regMsg.push(err.message); 
+        });
          res.redirect("/register");
      });
  });
 
 router.route('/login').get((req, res) => {
-  res.render('login', {response : loginMsg});
+  res.render('login', {response : loginMsg, user: req.session.user});
 }).post((req,res) => {
   var email = req.body.email;
   var password = req.body.password;

@@ -9,7 +9,7 @@
 
 
 
-<nav class="navbar navbar-expand-md bg-transparent navbar-dark">
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
     <a class="navbar-brand" href="/">TTStudio</a>
 
     <!-- Toggler/collapsibe Button -->
@@ -36,6 +36,7 @@
                   <%= user.userInfo.displayName %>
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item align-content-lg-center" href="/user/<%= user.username %>">Profile</a>
                   <a class="dropdown-item align-content-lg-center" href="/new_article">New Article</a>
                   <a class="dropdown-item align-content-lg-center" href="/logout">Logout <i class="fa fa-sign-out" style="margin-left: 4px;" aria-hidden="true"></i></a>
                 </div>

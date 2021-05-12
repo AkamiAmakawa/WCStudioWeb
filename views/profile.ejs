@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="/css/profile.css">
+    <script src="/ckeditor/ckeditor.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <script>
+        $(function(){
+           $('.datepicker').datepicker({
+              format: 'mm-dd-yyyy'
+            });
+        });
+        </script> -->
+</head>
+<body>
+    <div id="main">
+        <div id="header">
+            <%- include('./partials/navbar.ejs') %>
+        </div>
+    <form action="/user/<%= data.username %>" method="POST">
+        <div class="container-fluid">
+            <h1 style="text-align: center;">Profile</h1>
+
+            <div class="row" id="working-space">
+                <div class="col-4" id="avatar">
+                    <img src="/image/avatar.png" alt="Avatar" class="rounded-circle">
+                </div>
+                <div class="col-3" id="read-only-info">
+                    <div class="row" id="email"><h4>Email</h4></div>
+                    <div class="row" id="email-content"><%= data.email %></div>
+                    <div class="row" id="id"><h4>ID</h4></div>   
+                    <div class="row" id="id-content"><p><%= data.id %></p></div>
+                </div>
+                                                        <!-- Editable area -->
+                <% if(data.edit){ %>
+                    <div class="col-5" id="updatable-info">
+                        <div class="form-group">
+                            <label for="displayName" style="margin-top: 8px;">Display name:</label>
+                            <input type="text" class="form-control" name ="displayName" id="displayName" value="<%= data.userInfo.displayName %>">
+                            <label for="dob">Date Of Birth:</label>
+                            <input type="date" class="form-control" name = "dob" id="dob" value="<%= data.userInfo.date_of_birth %>">
+                        </div>
+                    </div>
+                </div>
+                <div class="row" name = "description" id="description">
+                    <label for="des" style="font-weight: bold; font-size: 20px; margin: 4px;">Description:</label>
+                    <textarea name="des" id="des" cols="30" rows="10"><%- data.userInfo.description %></textarea>
+                </div>
+    
+                <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+            </div>
+    
+            <%} else { %>
+                <div class="col-5" id="updatable-info">
+                    <div class="form-group">
+                        <label for="usr" style="margin-top: 8px;">Username:</label>
+                        <p><%= data.userInfo.displayName%></p>
+                      </div>
+                      <div class="form-group">
+                        <label for="dob">Date Of Birth:</label>
+                        <p><%= data.userInfo.date_of_birth %></p>
+                      </div>
+                </div>
+            </div>
+
+            <div class="row" id="description">
+                <label for="des" style="font-weight: bold; font-size: 20px; margin: 4px;">Description:</label>
+                <%- data.userInfo.description%>
+            </div>
+            <% if(user && user.id == data.id){ %>
+            <a href="/user/<%= data.username %>/edit"><button type="button" class="btn btn-primary">Edit</button></a>
+        </div>
+            <% }}       %>
+        </form>
+    </div>
+        <script>
+            CKEDITOR.replace('des');
+        </script>
+
+        <div id="footer">
+            <%- include("./partials/footer.ejs")%>
+        </div>
+</body>
+</html>
