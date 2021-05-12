@@ -19,7 +19,7 @@ var UserAccount = db_sequelize.define('UserAccount', {
         validate:{
             customValidation(value,next){
                 UserAccount.findAll({attributes: ['id'], where: {email : value,}}).then((result) => {
-                    if(result){
+                    if(result.length){
                         return next(new Error('Email already exist'));
                     }
                     else{
@@ -36,7 +36,7 @@ var UserAccount = db_sequelize.define('UserAccount', {
         validate:{
             customValidation(value,next){
                 UserAccount.findAll({attributes: ['id'], where: {username : value,}}).then((result) => {
-                    if(result){
+                    if(result.length){
                         return next(new Error('Username already exist'));
                     }
                     else{

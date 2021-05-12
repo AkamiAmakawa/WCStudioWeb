@@ -28,6 +28,7 @@ var sessionChecker = (req, res, next) => {
  router.route('/register')
  .get(sessionChecker, (req, res) => {
      res.render("register", {response : regMsg, user: req.session.user});
+     regMsg = "";
  }).post(async (req, res) => {
      UserAccount.create({
          username: req.body.username,
@@ -51,6 +52,7 @@ var sessionChecker = (req, res, next) => {
 
 router.route('/login').get((req, res) => {
   res.render('login', {response : loginMsg, user: req.session.user});
+  loginMsg = "";
 }).post((req,res) => {
   var email = req.body.email;
   var password = req.body.password;
