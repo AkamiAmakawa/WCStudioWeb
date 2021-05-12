@@ -13,7 +13,7 @@ router.route("/user/:username/:action?").get((req, res) => {
     }).then(user => {
         user = user.toJSON();
         console.log(user);
-        if(req.params.action == 'edit' && req.session.user && req.session.user.id == user.id){
+        if(req.params.action == 'edit' && req.session.user && (req.session.user.id == user.id|| req.session.user.userInfo.permissionLevel > 2)){
             user.edit = true;
         } else {
             user.edit = false;
@@ -36,6 +36,7 @@ router.route("/user/:username/:action?").get((req, res) => {
         }).then(() =>{
                 res.redirect("/user/" + req.params.username);
             }).catch(error =>{
+                console.log(error);
                 res.redirect("/user/" + req.params.username + "/edit");
             })
     })

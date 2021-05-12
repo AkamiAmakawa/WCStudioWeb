@@ -10,6 +10,8 @@ exports.sendArticle = async function (category, author, name, content) {
       authorId: author,
       a_name: name,
       content: content,
+    }).catch(error =>{
+      throw error;
     })
 };
 
@@ -18,6 +20,8 @@ exports.editArticle = async function (id, category, name, content) {
     where: {
       id : id,
     }
+  }).catch(error =>{
+    throw error;
   });
 }
 
@@ -36,6 +40,8 @@ exports.getArticlesID = async function (category, amount, sort) {
         ['createdAt', sort],
       ],
       limit : amount,
+    }).catch(error =>{
+      throw error;
     });
     var data = [];
     for(sub of raw_data){
@@ -60,7 +66,9 @@ exports.getArticle = async function (id) {
         },
       ],
     },
-  ],});
+  ],}).catch(error =>{
+    throw error;
+  });
     data = data.toJSON();
     data.createdAt.toUTCString();
     data.createdAt = moment(data.createdAt).local().format("DD/MM/YYYY HH:mm");
@@ -86,11 +94,13 @@ exports.getArticle = async function (id) {
 
 //Delete an article from database
 
-exports.deleteArticle = function (id) {
+exports.deleteArticle = async function (id) {
   Article.destroy({
     where: {
       id : id
     }
+  }).catch(error =>{
+    throw error;
   })
 }
 
@@ -110,6 +120,8 @@ exports.getComment = async function (id) {
         ],
       },
     ]
+  }).catch(error =>{
+    throw error;
   })
   var data = [];
   for(sub of raw_data){

@@ -50,7 +50,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row" name = "description" id="description">
+                <div class="row" id="description">
                     <label for="des" style="font-weight: bold; font-size: 20px; margin: 4px;">Description:</label>
                     <textarea name="des" id="des" cols="30" rows="10"><%- data.userInfo.description %></textarea>
                 </div>
@@ -75,7 +75,7 @@
                 <label for="des" style="font-weight: bold; font-size: 20px; margin: 4px;">Description:</label>
                 <%- data.userInfo.description%>
             </div>
-            <% if(user && user.id == data.id){ %>
+            <% if(user &&( user.id == data.id || user.userInfo.permissionLevel > 2)){ %>
             <a href="/user/<%= data.username %>/edit"><button type="button" class="btn btn-primary">Edit</button></a>
         </div>
             <% }}       %>

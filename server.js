@@ -110,7 +110,7 @@ app.get('/a/:id',async (req,res) => {
 
 app.get('/new_article', (req,res) => {
   var data = {id : "0", a_name : "", content: ""};
-  if(!req.session.user){
+  if(!req.session.user || req.session.user.userInfo.permissionLevel < 2){
     res.redirect("/");
   }
   else{
@@ -122,8 +122,7 @@ app.get('/new_article', (req,res) => {
 
 app.get('/edit_article/:id', async (req, res) => {
   var article = await Article.findByPk(req.params.id, {attributes: ['authorId']});
-  console.log(article);
-  if(!req.session.user || req.session.user.id != article.authorId){
+  if(!req.session.user || (req.session.user.id != article.authorId && req.session.user.userInfo.permissionLevel < 3)){
     res.redirect("/");
   }
   else{
@@ -152,16 +151,24 @@ app.post('/a/:id', (req, res) => {
 
 //Delete article
 
-app.get('/remove_article/:id', (req, res) => {
+app.get('/remove_article/:id', async (req, res) => {
+  var article = await Article.findByPk(req.params.id, {attributes: ['authorId']});
+  if(!req.session.user || (req.session.user.id != article.authorId && req.session.user.userInfo.permissionLevel < 3)){
+    res.redirect("/");
+  }else{
   db_process.deleteArticle(req.params.id);
   res.redirect('/');
+  }
 })
 
 //Show all news
 
 app.get('/news/:page', async (req, res) =>{
   news_list_pagination.current = req.params.page;
-  var totalArticles = await db_process.getArticlesID("news", 1000, "DESC");
+  var totalArticles = await db_process.getArticlesID("news", 1000, "DESC").catch(error =>{
+    console.log(error);
+    res.redirect('/news/' + req.params.page);
+  });
   var data;
   //If there are no data
   if(!totalArticles){
@@ -181,7 +188,10 @@ app.get('/news/:page', async (req, res) =>{
 
 // Route for everything else.
 app.get('*', async function(req, res){
-  var data = await db_process.getArticlesID("news", 3, "DESC");
+  var data = await db_process.getArticlesID("news", 3, "DESC").catch(error =>{
+    console.log(error);
+    res.redirect('/');
+  });
   res.render("index", {data: data,user: req.session.user});
 });
 

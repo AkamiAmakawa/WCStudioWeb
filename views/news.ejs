@@ -19,11 +19,9 @@
 
 <!-- edit/delete button     -->
 <%  hidden = "";
- if (!user || (data.authorId != user.id)) { 
-    hidden = "hidden";
+ if (!user || (data.authorId != user.id && user.userInfo.permissionLevel < 3)) { 
+    hidden = "d-none";
  } %>
-<!-- <a href="/edit_article/<%= data.id%>"><button class = "<%=hidden%>">Edit</button></a>
-<button onclick="delConfirm()" class = "<%=hidden%>">Remove</button> -->
 
         <div id="content">
             <article>
@@ -42,11 +40,11 @@
             </article>
         </div>
 
-        <div class="btn-group dropup">
+        <div class="btn-group dropup <%= hidden %>">
           <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Setting
           </button>
-          <div class="dropdown-menu <%= hidden %>" aria-labelledby="dropdownMenuButton">
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a href="/edit_article/<%= data.id%>"><button class = "dropdown-item">Edit</button></a>
             <button onclick="delConfirm()" class = "dropdown-item">Remove</button>
           </div>

@@ -58,11 +58,11 @@ router.route('/login').get((req, res) => {
   .then(async function (user){
       if(!user){
         loginMsg = "Incorrect email or password";
-        res.render('login', {response : loginMsg});
+        res.redirect("/login");
       }
       else if(!user.validPassword(user, password)){
         loginMsg = "Incorrect email or password";
-        res.render('login', {response : loginMsg});
+        res.redirect("/login");
       }
       else{
         req.session.user = user.toJSON();
@@ -70,6 +70,9 @@ router.route('/login').get((req, res) => {
         console.log(req.session.user);
         res.redirect('/');
       }
+  }).catch(error => {
+    loginMsg = "Some problem orcurred please try again";
+    res.redirect("/login");
   })
 })
 
