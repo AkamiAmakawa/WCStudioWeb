@@ -15,6 +15,7 @@ var db_process = require('./article_process');
 //   per_page is max number of articles per page
 //   max_show_page is the max number of page in pagination bar of each side for example 2 will be << 2 3 4 5 6 >> assume current page is 4
 var news_list_pagination = {current: 1, total: 1, per_page: 4, max_show_page: 2};
+var news_comment_pagination = {current: 1, total: 1, per_page: 3, max_show_page: 2};
 const { cache } = require('ejs');
 const cookieParser = require('cookie-parser');
 const Article = require("./models/articles");
@@ -96,14 +97,34 @@ app.get("/product", (req, res) => {
 })
 
 //Article display page
-app.get('/a/:id',async (req,res) => {
+app.get('/a/:id/:page?',async (req,res) => {
+  if(!req.params.page){
+    page = 1;
+  }
+  else{
+    page = req.params.page;
+  }
   var data = await db_process.getArticle(req.params.id);
   if(!data){
     res.sendStatus(404);
   }
   else{
+    var comment_data;
     var comment = await db_process.getComment(req.params.id);
-    res.render("news", {data: data, user: req.session.user, commentList : comment});
+    if(!comment.length){
+      news_comment_pagination.current = 1;
+      news_comment_pagination.total = 1;
+    }else{
+      news_comment_pagination.current = page;
+      news_comment_pagination.total = Math.ceil(comment.length/news_comment_pagination.per_page);
+    if(page > news_comment_pagination.total || page < 1){
+      news_comment_pagination.current = 1;
+    }
+    var start_comment = (news_comment_pagination.current - 1) * news_comment_pagination.per_page;
+    var end_comment = start_comment + news_comment_pagination.per_page;
+    comment_data = comment.slice(start_comment, end_comment);
+  }
+    res.render("news", {data: data, user: req.session.user, commentList : comment_data, pag : news_comment_pagination});
   }
 })
 
@@ -138,8 +159,8 @@ app.get('/edit_article/:id', async (req, res) => {
 
 //Post comment
 
-app.post('/a/:id', (req, res) => {
-  if(req.body.edit < 0){
+app.post('/a/:id/:page?', (req, res) => {
+  if(!req.body.edit || req.body.edit < 0){
   Comment.create({
     authorId: req.body.authorId,
     articleId: req.body.articleId,
@@ -207,7 +228,7 @@ app.get('/news/:page', async (req, res) =>{
   });
   var data;
   //If there are no data
-  if(!totalArticles){
+  if(!totalArticles.length){
     news_list_pagination.current = 1;
     news_list_pagination.total = 1;
   }else{

@@ -55,7 +55,7 @@
           <h3>Comment section</h3>
           <ul class="list-group" id="posted-comment">
 
-            <% let i = 0;
+            <% let j = 0;
              commentList.forEach(comment => {
              %>
               <div class="text-justify darker mt-4 float-right row" id="cmt">
@@ -69,17 +69,63 @@
 
                       <%  if (user && (comment.authorId != user.id || user.userInfo.permissionLevel < 3)) {  %>
                       <div class="col-10 mr-auto">
-                        <a href="#" onclick="return editCmtFunc(<%= i %>)" id="edit-cmt">Edit</a>
-                        <a href="#" onclick="return deleteCmtFunc(<%= i %>)">Delete</a>
+                        <a href="#" onclick="return editCmtFunc(<%= j %>)" id="edit-cmt">Edit</a>
+                        <a href="#" onclick="return deleteCmtFunc(<%= j %>)">Delete</a>
                       </div>
                       <% } %>
                   </div>
-            <% i++; }); %>
+            <% j++; }); %>
             </ul>
 
                <!--PAGINATION -->
                
-               
+               <nav aria-label="Comment page navigation">
+            <ul class = "pagination justify-content-end">
+                <% switch (parseInt(pag.current)) {
+                    case 1:
+                        var prev_state = "disabled";
+                    case pag.total:
+                        var next_state = "disabled";
+                        break;
+                    default:
+                        var prev_state = "";
+                        var next_state = "";
+                        break;
+                }   %>
+
+                <li class="page-item <%= prev_state %>">
+                    <a class="page-link" href="/a/<%= data.id %>/<%= parseInt(pag.current)-1 %>" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                       <span class="sr-only">Previous</span>
+                      </a>
+                </li>
+
+                <% for (var i = pag.current - pag.max_show_page; i < pag.current; i++){ 
+                    if (i > 0){ %>
+                        <li class="page-item"><a class="page-link" href="/a/<%= data.id %>/<%= i %>"><%= i %></a></li>
+                <%   }
+                 } %>
+                 
+                <li class="page-item active">
+      <a class="page-link" href="/a/<%= data.id %>/<%= pag.current %>">  <%= pag.current %> <span class="sr-only">(current)</span></a>
+                </li>
+                
+                <% for (var i = parseInt(pag.current) + 1; i <= (pag.current + pag.max_show_page); i++){
+                    if (i <= pag.total){ %>
+                        <li class="page-item"><a class="page-link" href="/a/<%= data.id %>/<%= i %>"><%= i %></a></li>
+                <%    } 
+                 } %>
+
+                <li class="page-item <%= next_state %>">
+                    <a class="page-link" href="/a/<%= data.id %>/<%= parseInt(pag.current) + 1 %>" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                       <span class="sr-only">Next</span>
+                      </a>
+                </li>
+            </ul>
+        </nav>
+        </div>
+
 
 
 
@@ -89,7 +135,7 @@
               <img src="https://i.imgur.com/CFpa3nK.jpg" alt="" class="rounded-circle" width="40" height="40">
             <input type="hidden" name = "articleId" id="articleId" value="<%= data.id%>">    
             <input type="hidden" name = "authorId" id="authorId" value="<%= user.id%>">   
-            <input type="hidden" name = "edit" id = "edit" value= "0">
+            <input type="hidden" name = "edit" id = "edit">
             <input type="text" class="form-control" name="comment" id="comment" placeholder="Say something!" style="width: 96%; float: right;">
           </div>
           <button type="submit" class="btn btn-outline-primary" id="submit-button" style="margin-left: 60px;">Submit</button>
