@@ -19,6 +19,7 @@ const { cache } = require('ejs');
 const cookieParser = require('cookie-parser');
 const Article = require("./models/articles");
 const Comment = require("./models/comment");
+const UserAccount = require("./models/user");
 
 
 
@@ -138,6 +139,7 @@ app.get('/edit_article/:id', async (req, res) => {
 //Post comment
 
 app.post('/a/:id', (req, res) => {
+  if(req.body.edit < 0){
   Comment.create({
     authorId: req.body.authorId,
     articleId: req.body.articleId,
@@ -147,8 +149,42 @@ app.post('/a/:id', (req, res) => {
   }).catch(error =>{
     console.log(error);
   })
+}else{
+  Comment.update({content : req.body.comment}, {
+    where:{
+      id : req.body.edit
+    }
+  }).then(() =>{
+    res.redirect("/a/" + req.params.id);
+  }).catch(error =>{
+    console.log(error);
+  })
+}
   })
 
+//Delete comment
+
+app.get("/remove_cmt/:a_id/:c_id",async (req,res) =>{
+  var commentId = req.params.c_id;
+  var articleId = req.params.a_id;
+  Comment.findByPk(commentId).then(comment =>{
+    if(!req.session.user || (req.session.user.id != comment.authorId && req.session.user.userInfo.permissionLevel < 3)){
+      res.redirect("/");
+    }else{
+      Comment.destroy({
+        where:{
+          id : commentId
+        }
+      }).catch(error => {
+        console.log(error);
+      })
+      res.redirect("/a/" + articleId);
+    }
+
+  }).catch(error =>{
+    console.log(error);
+  })
+})
 //Delete article
 
 app.get('/remove_article/:id', async (req, res) => {
