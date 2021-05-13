@@ -33,7 +33,8 @@ router.route("/user/:username/:action?").get((req, res) => {
             where:{
                 id : id
             }
-        }).then(() =>{
+        }).then(async () =>{
+                req.session.user = await UserAccount.findByPk(id, {include: UserInfo});
                 res.redirect("/user/" + req.params.username);
             }).catch(error =>{
                 console.log(error);

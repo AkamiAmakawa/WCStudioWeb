@@ -78,7 +78,7 @@
         
             <% }    %>
         </form>
-        <% if(user &&( user.id == data.id || user.userInfo.permissionLevel > 2)){ %>
+        <% if(user &&( user.id == data.id || user.userInfo.permissionLevel > 2) && !data.edit){ %>
         <a href="/user/<%= data.username %>/edit"><button type="button" class="btn btn-primary">Edit</button></a>
         <% } %>
         <script>
