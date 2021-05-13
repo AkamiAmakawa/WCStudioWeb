@@ -109,11 +109,12 @@ app.get('/a/:id/:page?',async (req,res) => {
     res.sendStatus(404);
   }
   else{
-    var comment_data;
+    var comment_data =[];
     var comment = await db_process.getComment(req.params.id);
     if(!comment.length){
       news_comment_pagination.current = 1;
       news_comment_pagination.total = 1;
+      comment_data;
     }else{
       news_comment_pagination.current = page;
       news_comment_pagination.total = Math.ceil(comment.length/news_comment_pagination.per_page);
@@ -226,11 +227,12 @@ app.get('/news/:page', async (req, res) =>{
     console.log(error);
     res.redirect('/news/' + req.params.page);
   });
-  var data;
+  var data = [];
   //If there are no data
   if(!totalArticles.length){
     news_list_pagination.current = 1;
     news_list_pagination.total = 1;
+    data = [];
   }else{
   news_list_pagination.total = Math.ceil(totalArticles.length/news_list_pagination.per_page);
   if(req.params.page > news_list_pagination.total || req.params.page < 1){

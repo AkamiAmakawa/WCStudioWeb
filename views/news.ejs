@@ -67,7 +67,7 @@
                       <div id="cmt-content" class="col-8"><p style="text-align: left;"><%=comment.content%></p></div>
 
 
-                      <%  if (user && (comment.authorId != user.id || user.userInfo.permissionLevel < 3)) {  %>
+                      <%  if (user && (comment.authorId == user.id || user.userInfo.permissionLevel > 2)) {  %>
                       <div class="col-10 mr-auto">
                         <a href="#" onclick="return editCmtFunc(<%= j %>)" id="edit-cmt">Edit</a>
                         <a href="#" onclick="return deleteCmtFunc(<%= j %>)">Delete</a>
@@ -81,17 +81,16 @@
                
                <nav aria-label="Comment page navigation">
             <ul class = "pagination justify-content-end">
-                <% switch (parseInt(pag.current)) {
-                    case 1:
+                <%
+                var prev_state = "";
+                var next_state = "";
+                if (parseInt(pag.current) == 1) {
                         var prev_state = "disabled";
-                    case pag.total:
+                }
+                    if (parseInt(pag.current) == pag.total){
                         var next_state = "disabled";
-                        break;
-                    default:
-                        var prev_state = "";
-                        var next_state = "";
-                        break;
-                }   %>
+                    }
+                 %>
 
                 <li class="page-item <%= prev_state %>">
                     <a class="page-link" href="/a/<%= data.id %>/<%= parseInt(pag.current)-1 %>" aria-label="Previous">
