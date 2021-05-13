@@ -21,29 +21,29 @@
         </script> -->
 </head>
 <body>
+    <div id="header">
+        <%- include('./partials/navbar.ejs') %>
+    </div>
     <div id="main">
-        <div id="header">
-            <%- include('./partials/navbar.ejs') %>
-        </div>
     <form action="/user/<%= data.username %>" method="POST">
         <div class="container-fluid">
             <h1 style="text-align: center;">Profile</h1>
 
             <div class="row" id="working-space">
                 <div class="col-4" id="avatar">
-                    <img src="/image/avatar.png" alt="Avatar" class="rounded-circle">
+                    <img src="https://i.imgur.com/CFpa3nK.jpg" alt="Avatar" class="rounded-circle">
                 </div>
                 <div class="col-3" id="read-only-info">
                     <div class="row" id="email"><h4>Email</h4></div>
                     <div class="row" id="email-content"><%= data.email %></div>
                     <div class="row" id="id"><h4>ID</h4></div>   
-                    <div class="row" id="id-content"><p><%= data.id %></p></div>
+                    <div class="row" id="id-content"><p style="font-weight: bold;"><%= data.id %></p></div>
                 </div>
                                                         <!-- Editable area -->
                 <% if(data.edit){ %>
                     <div class="col-5" id="updatable-info">
-                        <div class="form-group">
-                            <label for="displayName" style="margin-top: 8px;">Display name:</label>
+                        <div class="form-group" >
+                            <label for="displayName" style="font-weight: bold; margin-top: 8px;">Display name:</label>
                             <input type="text" class="form-control" name ="displayName" id="displayName" value="<%= data.userInfo.displayName %>">
                             <label for="dob">Date Of Birth:</label>
                             <input type="date" class="form-control" name = "dob" id="dob" value="<%= data.userInfo.date_of_birth %>">
@@ -60,8 +60,8 @@
     
             <%} else { %>
                 <div class="col-5" id="updatable-info">
-                    <div class="form-group">
-                        <label for="usr" style="margin-top: 8px;">Username:</label>
+                    <div class="form-group" style="margin-bottom: 26px;">
+                        <label for="usr" style="margin-top: 8px;">Display Name:</label>
                         <p><%= data.userInfo.displayName%></p>
                       </div>
                       <div class="form-group">
@@ -73,17 +73,18 @@
 
             <div class="row" id="description">
                 <label for="des" style="font-weight: bold; font-size: 20px; margin: 4px;">Description:</label>
-                <%- data.userInfo.description%>
+                <div class="des-content"><%- data.userInfo.description%></div>
             </div>
             <% if(user &&( user.id == data.id || user.userInfo.permissionLevel > 2)){ %>
-            <a href="/user/<%= data.username %>/edit"><button type="button" class="btn btn-primary">Edit</button></a>
         </div>
+        
             <% }}       %>
         </form>
-    </div>
+        <a href="/user/<%= data.username %>/edit"><button type="button" class="btn btn-primary">Edit</button></a>
         <script>
             CKEDITOR.replace('des');
         </script>
+    </div>
 
         <div id="footer">
             <%- include("./partials/footer.ejs")%>

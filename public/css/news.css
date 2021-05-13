@@ -150,5 +150,15 @@
   right: 50px;
 }
   
+#content{
+  /* background-color: burlywood; */
+}
 
+#cmt{
+  margin-bottom: 20px;
+}
+
+#cmt-content{
+  text-align: left;
+}
   

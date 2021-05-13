@@ -54,27 +54,39 @@
           <h3>Comment section</h3>
           <ul class="list-group" id="posted-comment">
 
-          </ul>
+            <% commentList.forEach(comment => { %>
+              <div class="text-justify darker mt-4 float-right row" id="cmt">
+                      <img src="https://i.imgur.com/CFpa3nK.jpg" alt="" class="rounded-circle" width="40" height="40" style="margin-left: 16px;">
+                      <div class="col-3.5"><a href="/user/<%=comment.UserAccount.username%>">
+                        <%= comment.UserAccount.userInfo.displayName %>
+                        <a> <span>- <%= comment.createdAt%></span> <br></div>
+                      <div id="cmt-content" class="col"><p style="text-align: left;"><%=comment.content%></p></div>
+                  </div>
+            <%}); %>
+            </ul>
+
+          <!-- </ul> -->
           <% if (user){ %>
           <div class="form-group">
             <form action="/a/<%= data.id %>" method="POST">
+              <img src="https://i.imgur.com/CFpa3nK.jpg" alt="" class="rounded-circle" width="40" height="40">
             <input type="hidden" name = "articleId" id="articleId" value="<%= data.id%>">    
             <input type="hidden" name = "authorId" id="authorId" value="<%= user.id%>">   
-            <input type="text" class="form-control" name="comment" id="comment" placeholder="Say something!">
+            <input type="text" class="form-control" name="comment" id="comment" placeholder="Say something!" style="width: 96%; float: right;">
           </div>
-          <button type="submit" class="btn btn-outline-primary" id="submit-button">Submit</button>
+          <button type="submit" class="btn btn-outline-primary" id="submit-button" style="margin-left: 60px;">Submit</button>
         </form>
         <%} %>
 
                 
-        <% commentList.forEach(comment => { %>
-            <div class="text-justify darker mt-4 float-right"> <img src="https://i.imgur.com/CFpa3nK.jpg" alt="" class="rounded-circle" width="40" height="40">
+        <!-- <% commentList.forEach(comment => { %>
+            <div class="text-justify darker mt-4 float-right" id="cmt"> <img src="https://i.imgur.com/CFpa3nK.jpg" alt="" class="rounded-circle" width="40" height="40">
                     <a href="/user/<%=comment.UserAccount.username%>">
                       <%= comment.UserAccount.userInfo.displayName %>
                       <a> <span>- <%= comment.createdAt%></span> <br>
                     <p><%=comment.content%></p>
                 </div>
-          <%}); %>
+          <%}); %> -->
           </ul>
         </div>
 
