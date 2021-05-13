@@ -70,17 +70,17 @@
                       </div>
                 </div>
             </div>
-
             <div class="row" id="description">
                 <label for="des" style="font-weight: bold; font-size: 20px; margin: 4px;">Description:</label>
                 <div class="des-content"><%- data.userInfo.description%></div>
             </div>
-            <% if(user &&( user.id == data.id || user.userInfo.permissionLevel > 2)){ %>
         </div>
         
-            <% }}       %>
+            <% }    %>
         </form>
+        <% if(user &&( user.id == data.id || user.userInfo.permissionLevel > 2)){ %>
         <a href="/user/<%= data.username %>/edit"><button type="button" class="btn btn-primary">Edit</button></a>
+        <% } %>
         <script>
             CKEDITOR.replace('des');
         </script>
