@@ -66,3 +66,7 @@
     transform: translateX(-50%);
     text-align: center;
 }
+
+.title-name{
+    margin-left: 10%;
+}

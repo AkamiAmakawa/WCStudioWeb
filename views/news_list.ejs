@@ -21,8 +21,8 @@
         <ul class="newlist">
           <%if(data){
              data.forEach(function (news) { %>
-            <li class="newli"><a class="new-a" href="/a/<%= news.id %>">
-                <h3><%= news.a_name%></h3>
+            <li class="newli"><a class="new-a" href="/a/<%= news.id %>" style="color: white;">
+                <h3 class="title-name" style="text-shadow: 2px 2px 2px #000;"><%= news.a_name%></h3>
                 <span class="timepost"><%= news.createdAt %></span>
             </a></li>
           <% })}else { %>

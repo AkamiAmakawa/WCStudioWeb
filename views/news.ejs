@@ -61,7 +61,11 @@
                       <div class="col-3.5"><a href="/user/<%=comment.UserAccount.username%>">
                         <%= comment.UserAccount.userInfo.displayName %>
                         <a> <span>- <%= comment.createdAt%></span> <br></div>
-                      <div id="cmt-content" class="col"><p style="text-align: left;"><%=comment.content%></p></div>
+                      <div id="cmt-content" class="col-8"><p style="text-align: left;"><%=comment.content%></p></div>
+                      <div class="cmt-edit">
+                        <a href="" id="edit-cmt">Edit</a>
+                        <a href="" id="delete-cmt">Delete</a>
+                      </div>
                   </div>
             <%}); %>
             </ul>
