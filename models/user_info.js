@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize")
 var db_sequelize = require("./db_sequelize");
 const UserAccount = require("./user");
-var UserInfo = db_sequelize.define('userInfo', {
+const UserInfo = db_sequelize.define('userInfo', {
     id: {
         type: DataTypes.INTEGER,
         allowNull : false,

@@ -4,7 +4,7 @@ var bcrypt = require('bcrypt');
 const UserInfo = require("./user_info");
 const Article = require("./articles");
 const Comment = require("./comment");
-var UserAccount = db_sequelize.define('UserAccount', {
+const UserAccount = db_sequelize.define('UserAccount', {
     id: {
         type: DataTypes.INTEGER,
         allowNull : false,

@@ -9,7 +9,6 @@ const passport = require("passport");
 const authRouter = require("./auth");
 const userRouter = require("./user_manager");
 var db_process = require('./article_process');
-
 // Variable for controlling news listing page
 //   current/total is the current/total page
 //   per_page is max number of articles per page
@@ -21,10 +20,24 @@ const cookieParser = require('cookie-parser');
 const Article = require("./models/articles");
 const Comment = require("./models/comment");
 const UserAccount = require("./models/user");
-
-
-
+const sequelize = require("./models/db_sequelize")
+const fs = require("fs")
+const {Sequelize} = require("sequelize")
 //Connect to the database
+const models = path.join(__dirname, 'models') // path to a models' folder
+
+fs.readdirSync(models)
+  .filter(function (file) {
+    return (file.indexOf('.') !== 0)  && (file.slice(-3) === '.js')
+  })
+  .forEach(function (file) {
+    require(path.join(models, file))
+  })
+
+  // sequelize.sync({alter : true});
+
+
+
 
 
 if (app.get("env") === "production") {

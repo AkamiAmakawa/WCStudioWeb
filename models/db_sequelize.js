@@ -7,10 +7,11 @@ module.exports = new Sequelize({
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     database: process.env.DATABASE,
+    port: 3306,
     pool: {
         max: 10,
         min: 1,
         acquire: 60000,
         idle: 10000
-      }
+      },
 })
