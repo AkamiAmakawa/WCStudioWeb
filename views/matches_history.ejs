@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Match history</title>
+    <link rel="stylesheet" href="/css/matches_history.css">
+</head>
+<body>
+   <div id="header">
+       <%- include('./partials/navbar.ejs') %>
+   </div> 
+   <div id="main">
+        <div id="left-content"></div>
+        <div id="main-content">
+            <div id="title">
+                <h1>Match history</h3>
+            </div>
+            <div class="table-placeholder">
+                <table class="tbl">
+                    <tr class="table-title">
+                        <th>Turn</th>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <th>Card</th>
+                        <td>Stab</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="table-placeholder">
+                <table class="tbl">
+                    <tr>
+                        <th>Turn</th>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <th>Card</th>
+                        <td>Stab</td>
+                    </tr>
+                </table>
+            </div> 
+        </div>
+        <div id="right-content"></div>
+   </div>
+   <div id="footer">
+       <%- include('./partials/footer.ejs') %>
+   </div>
+</body>
+</html>

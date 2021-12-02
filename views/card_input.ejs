@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card input</title>
+    <link rel="stylesheet" href="/css/card_input.css">
+</head>
+<body>
+      <div id="header">
+       <%- include('./partials/navbar.ejs') %>
+   </div> 
+   <div id="main">
+        <div id="left-content"></div>
+        <div id="main-content">
+            <label for="name">Name: </label>
+           <input type="text" name="name"><br>
+            <label for="description">Descrition: </label>
+           <input type="text" name="description"><br>
+            <label for="name">Image: </label>
+           <input type="file" name="image" id="" accept=".jpg, .png"><br>
+           <input type="button" value="Accept" onclick=""><br>
+        </div>
+        <div id="right-content"></div>
+   </div>
+   <div id="footer">
+       <%- include('./partials/footer.ejs') %>
+   </div>
+</body>
+</html>

@@ -1,0 +1,62 @@
+#main {
+    display: flex;
+    min-height: 800px;
+    background-color: #0D76E4;
+}
+
+#left-content {
+    flex: 1.3;
+}
+
+#right-content {
+    flex: 1.3;
+}
+
+#main-content {
+    flex: 2;
+    max-width: 900px;
+    background-color: burlywood;
+}
+
+#title {
+    padding-top: 15px;
+    text-transform: uppercase;
+    text-decoration: underline;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align: center;
+}
+
+#history-list {
+    margin-top: 60px;
+    padding-right: 40px;
+}
+
+.matchlist > li {
+    list-style: none;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    min-height: 125px;
+    margin-bottom: 44px;
+    display: flex;
+}
+
+.matchlist > li > .match-id {
+    flex-grow: 1;
+    display: flex;
+}
+.matchlist > li > .match-id > * {
+    align-self: center;
+    margin-left: 20px;
+    font-size: 30px;
+}
+
+.matchlist > li > .match-details {
+    flex: 2;
+    display: flex;
+    margin-left: auto;
+}
+.matchlist > li > .match-details > p {
+    align-self: flex-end;
+    flex: 1;
+    text-align: center;
+}
