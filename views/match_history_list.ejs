@@ -18,26 +18,25 @@
                 <h1>Match history</h3>
             </div>
             <div id="history-list">
+                <% if(data.length > 0) { %>
                 <ul class="matchlist">
+                    <% for(match of data) { %>
                     <li>
                         <div class="match-id">  
-                            <a href="/match_history">BOSS FIGHT #1</a>
+                            <a href="/match_detail/<%= match.id %>">BOSS FIGHT #<%=match.id%></a>
                         </div>
                         <div class= "match-details">
-                            <p>Time: 4'20s</p>
-                            <p>Turn: 20</p>
+                            <p>At: <%= match.createdAt %></p>
+                            <a href="/user/<%= match.player1_id %>"><%-match.player1_info.displayName %> </a>
+                            <span> AGAINST </span>
+                            <a href="/user/<%= match.player2_id %>"><%-match.player2_info.displayName %> </a>
                         </div>
                     </li>
-                    <li>
-                        <div class="match-id">  
-                            <a href="/match_history">BOSS FIGHT #2</a>
-                        </div>
-                        <div class= "match-details">
-                            <p>Time: 4'20s</p>
-                            <p>Turn: 20</p>
-                        </div>
-                    </li>
+                    <% } %>
                 </ul>
+                <% }else{ %>
+                    <p class="no_data_msg">NO BATTLE YET</p>
+                <% } %> 
             </div>
         </div>
         <div id="right-content"></div>

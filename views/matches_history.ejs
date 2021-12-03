@@ -15,33 +15,33 @@
    <div id="main">
         <div id="left-content"></div>
         <div id="main-content">
+                <% if(battle_data) { %>
             <div id="title">
-                <h1>Match history</h3>
+                <h1>BATTLE #<%= battle_data.id %></h1>
+                <br>
+                <a href="/user/<%= battle_data.player1_id %>"><%-battle_data.player1_info.displayName %> </a>
+                <span> AGAINST </span>
+                <a href="/user/<%= battle_data.player2_id %>"><%-battle_data.player2_info.displayName %> </a>
             </div>
+            <% if (move_list.length > 0) { %>
             <div class="table-placeholder">
                 <table class="tbl">
-                    <tr class="table-title">
-                        <th>Turn</th>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <th>Card</th>
-                        <td>Stab</td>
-                    </tr>
+                        <% for (let turn = 1; turn < move_list.length; turn++ ) { %>
+                            <tr>
+                                <th><%= turn %></th>
+                                <% for (move of move_list[turn]) { %>
+                                    <td><%= move.name %></td>
+                                <% } %>
+                            </tr>
+                        <%} %>
                 </table>
             </div>
-            <div class="table-placeholder">
-                <table class="tbl">
-                    <tr>
-                        <th>Turn</th>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <th>Card</th>
-                        <td>Stab</td>
-                    </tr>
-                </table>
-            </div> 
+            <% } else { %>
+            <p class = "no_data_msg">NO MOVE DATA FOUND</p>
+            <% }} else { %>
+                <p class = "no_data_msg">BATTLE NOT FOUND</p>
+                <% } %>
+
         </div>
         <div id="right-content"></div>
    </div>

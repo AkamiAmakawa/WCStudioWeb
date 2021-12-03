@@ -18,17 +18,17 @@
 
       <div id="news">
         <h3 class="news-title">News</h3>
+        <%if(data.length > 0){ %>
         <ul class="newlist">
-          <%if(data){
-             data.forEach(function (news) { %>
+             <% data.forEach(function (news) { %>
             <li class="newli"><a class="new-a" href="/a/<%= news.id %>" style="color: white;">
                 <h3 class="title-name" style="text-shadow: 2px 2px 2px #000;"><%= news.a_name%></h3>
                 <span class="timepost"><%= news.createdAt %></span>
             </a></li>
-          <% })}else { %>
-            <li class="newli"><p class="new-a">It seem like nothing has been posted yet!</p></li>
-          <%  }; %>
         </ul>
+        <% })}else { %>
+            <p class="no_data_msg">It seem like nothing has been posted yet!</p>
+          <%  }; %>
       </div>
 
       

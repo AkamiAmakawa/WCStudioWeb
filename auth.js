@@ -67,6 +67,7 @@ router.route('/login').get((req, res) => {
         res.redirect("/login");
       }
       else{
+        console.log(user);
         req.session.user = user.toJSON();
         delete req.session.user.password;
         console.log(req.session.user);
