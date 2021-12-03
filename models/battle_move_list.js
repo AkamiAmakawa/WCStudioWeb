@@ -28,3 +28,5 @@ Card.hasMany(BattleMove, {
 BattleHistory.hasMany(BattleMove, {
     foreignKey: "battle_id"
 })
+
+module.exports = BattleMove;

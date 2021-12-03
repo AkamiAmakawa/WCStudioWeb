@@ -12,6 +12,14 @@ const Card = db_sequelize.define("card", {
         type: DataTypes.CHAR(30),
         allowNull: false
     },
+    rank:{
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    cost:{
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
     description:{
         type: DataTypes.TEXT,
         allowNull:true

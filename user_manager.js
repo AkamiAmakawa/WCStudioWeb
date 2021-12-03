@@ -2,7 +2,7 @@ const express = require("express");
 const UserAccount = require("./models/user");
 const UserInfo = require("./models/user_info");
 const router = express.Router();
-
+const battle_process = require("./battle_history_process");
 //Routing
 router.route("/user/:username/:action?").get((req, res) => {
     UserAccount.findOne({
@@ -42,7 +42,37 @@ router.route("/user/:username/:action?").get((req, res) => {
             })
     })
     })
+//Match history page
 
+  router.route("/match_history/:id").get((req, res) => {
+    if(req.session.user){
+        battle_process.getBattleMove(req.params.id);
+        res.render("matches_history", {user: req.session.user})
+    }
+    else {
+        res.redirect("/")
+    }  
+  })
+  router.route("/match_history").get((req, res) => {
+    if(req.session.user){
+        battle_process.getBatleHistory(req.session.user.id);
+        res.render("match_history_list", {user: req.session.user});
+    }
+    else {
+        res.redirect("/")
+    }
+  })
+  //Card input page
+  router.route("/card_input").get((req, res) => {
+    res.render("card_input", {user: req.session.user});  
+  })
+
+  router.route("/ahmg_card_data/send_battle_result").put((req, res) => {
+      console.log(req.body);
+      battle_process.uploadBattleData(req.body);
+  })
+  
+  
 
 //Export
 module.exports = router;

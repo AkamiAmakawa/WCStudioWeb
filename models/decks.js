@@ -28,7 +28,7 @@ DeckList.belongsTo(UserAccount, {
     foreignKey: 'user_id'
 })
 UserAccount.hasMany(DeckList, {
-    foreignKey: "deck_id"
+    foreignKey: "user_id"
 })
 
 module.exports = DeckList

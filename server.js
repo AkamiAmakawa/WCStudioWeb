@@ -85,7 +85,8 @@ app.use((req, res, next) => {
   }
   next();
 });
-
+//Use json parser
+app.use(express.json())
 
 app.use("/", authRouter);
 app.use("/", userRouter);
@@ -108,19 +109,6 @@ app.post('/post', function(request, response){
 app.get("/product", (req, res) => {
   res.render("product", {user: req.session.user});
 })
-
-//Match history page
-app.get("/match_history_list", (req, res) => {
-  res.render("match_history_list", {user: req.session.user});
-})
-app.get("/matches_history", (req, res) => {
-  res.render("matches_history", {user: req.session.user});  
-})
-//Card input page
-app.get("/card_input", (req, res) => {
-  res.render("card_input", {user: req.session.user});  
-})
-
 
 //Article display page
 app.get('/a/:id/:page?',async (req,res) => {
