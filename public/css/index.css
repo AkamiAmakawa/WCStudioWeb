@@ -182,6 +182,11 @@ html {
   float: right;
 }
 
+#news > p {
+  text-align: center;
+  margin-top: 70px;
+}
+
 #story {
   position: relative;
 }

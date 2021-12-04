@@ -1,3 +1,7 @@
+#header {
+    margin-bottom: 50px;
+}
+
 #main {
     display: flex;
     min-height: 800px;

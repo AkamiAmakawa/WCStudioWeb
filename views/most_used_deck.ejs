@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Most deck used</title>
+    <link rel="stylesheet" href="/css/most_deck_used.css">
+</head>
+<body>
+      <div id="header">
+       <%- include('./partials/navbar.ejs') %>
+   </div> 
+   <div id="main">
+        <div id="left-content"></div>
+        <div id="main-content">
+           <div class="card_stats">
+               <img class="deck_img" src="image/deck01.png" alt="Deck image">
+               <h3>Sword Master</h3>
+               <p>Percentage used: 20%</p>
+           </div>
+           <div class="card_stats">
+               <img class="deck_img" src="image/deck02.png" alt="Deck image">
+               <h3>Runes Mage</h3>
+               <p>Percentage used: 20%</p>
+           </div>
+           <div class="card_stats">
+               <img class="deck_img" src="image/deck01.png" alt="Deck image">
+               <h3>Paladin</h3>
+               <p>Percentage used: 20%</p>
+           </div>              
+        </div>
+        <div id="right-content"></div>
+   </div>
+   <div id="footer">
+       <%- include('./partials/footer.ejs') %>
+   </div>
+</body>
+</html>

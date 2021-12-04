@@ -1,6 +1,8 @@
+#header {
+    margin-bottom: 70px;
+}
 #main {
-    display: flex;
-    
+    display: flex;   
 }
 
 #left-content{

@@ -88,7 +88,10 @@ router.route("/user/:username/:action?").get((req, res) => {
   router.route("/card_input").get((req, res) => {
     res.render("card_input", {user: req.session.user});  
   })
-
+  //Most used deck page
+  router.route("/most_used_deck").get((req, res) => {
+    res.render("most_used_deck", {user: req.session.user});  
+  })
   router.route("/ahmg_card_data/send_battle_result").put((req, res) => {
       console.log(req.body);
       battle_process.uploadBattleData(req.body);

@@ -51,6 +51,12 @@
     float: right;
 }
 
+#news > p {
+    margin-top: 40px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
 #main > nav {
     left: 50%;
     transform: translate(-45%,-35%);

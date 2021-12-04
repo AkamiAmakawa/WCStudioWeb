@@ -1,0 +1,32 @@
+#header {
+    margin-bottom: 70px;
+}
+#main {
+    display: flex;   
+    min-height: 655px;
+}
+
+#left-content{
+    flex: 0.5;
+}
+
+#right-content {
+    flex: 0.5;
+}
+
+#main-content {
+    flex: 1;
+    display: flex;
+}
+
+.card_stats {
+    flex: 1;
+    align-items: center;
+    text-align: center;
+}
+
+.deck_img {
+    width: 250px;
+    height: 360px;
+}
+
