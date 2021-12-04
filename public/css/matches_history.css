@@ -4,6 +4,7 @@
 
 #main {
     display: flex;
+    margin-top: 50px;
     min-height: 700px;
     background-color: #0D76E4;
 }
@@ -18,10 +19,16 @@
 
 #main-content {
     flex: 2;
+    margin: 20px;
+    border-radius: 10px;
     max-width: 900px;
     background-color: #FFFFFF;
 }
 
+
+#main-content > p {
+    text-align: center;
+}
 #title {
     padding-top: 15px;
     text-transform: uppercase;

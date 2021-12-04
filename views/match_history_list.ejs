@@ -26,10 +26,12 @@
                             <a href="/match_detail/<%= match.id %>">BOSS FIGHT #<%=match.id%></a>
                         </div>
                         <div class= "match-details">
-                            <p>At: <%= match.createdAt %></p>
-                            <a href="/user/<%= match.player1_id %>"><%-match.player1_info.displayName %> </a>
-                            <span> AGAINST </span>
-                            <a href="/user/<%= match.player2_id %>"><%-match.player2_info.displayName %> </a>
+                            <p id="time-created">At: <%= match.createdAt %></p>
+                            <div id="battle-between">
+                                <a href="/user/<%= match.player1_id %>"><%-match.player1_info.displayName %> </a>
+                                <span> AGAINST </span>
+                                <a href="/user/<%= match.player2_id %>"><%-match.player2_info.displayName %> </a>
+                            </div>    
                         </div>
                     </li>
                     <% } %>

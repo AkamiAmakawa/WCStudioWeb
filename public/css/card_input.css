@@ -3,6 +3,7 @@
 }
 #main {
     display: flex;   
+    min-height: 700px;
 }
 
 #left-content{
@@ -15,4 +16,18 @@
 
 #main-content {
     flex: 1;
+    display: flex;
+    padding-top: 80px;
+}
+
+#main-content > h1 {
+    text-align: center;
+}
+
+#main-content > .form {
+    align-self: center;
+}
+
+.form > label {
+    min-width: 100px;
 }
