@@ -68,6 +68,7 @@
     align-self: flex-end;
     flex: 1;
     text-align: center;
+    margin-bottom: 0;
 }
 
 .matchlist > li > .match-details > #battle-between {
