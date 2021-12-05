@@ -88,3 +88,8 @@ exports.uploadBattleData = async (battle_data) => {
     }
 
 }
+
+exports.getMostUsedDeck = async () => {
+    data = await db_sequelize.query("select * from most_used_deck")
+    return data[0]
+}

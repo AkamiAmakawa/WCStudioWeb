@@ -16,17 +16,19 @@
         <div id="main-content">
             <h1>CARD INPUT</h1>
             <div class="form">
-                <label for="name">Name: </label>
-                <input type="text" name="name"><br>
-                <label for="cost">Cost: </label>
-                <input type="text" name="cost"><br>
-                <label for="rank">Rank: </label>
-                <input type="text" name="rank"><br>
-                <label for="description">Descrition: </label>
-                <input type="text" name="description"><br>
-                <label for="name">Image: </label>
-                <input type="file" name="image" id="" accept=".jpg, .png"><br>
-                <input type="button" value="Accept" onclick=""><br>
+                <form class = "form" action="" method="POST">
+                    <label for="name">Name: </label>
+                    <input type="text" name="name" id="name"><br>
+                    <label for="cost">Cost: </label>
+                    <input type="number" name="cost" id="cost" min ="0"><br>
+                    <label for="rank">Rank: </label>
+                    <input type="number" name="rank" min="1" max = "3"><br>
+                    <label for="description">Descrition: </label>
+                    <input type="text" name="description"><br>
+                    <label for="name">Image: </label>
+                    <input type="file" name="image" id="" accept=".jpg, .png"><br>
+                    <input type="submit" value="Accept"><br>
+                </form>
             </div>
             
         </div>

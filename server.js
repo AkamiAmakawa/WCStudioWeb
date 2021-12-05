@@ -8,6 +8,7 @@ var session = require('express-session');
 const passport = require("passport");
 const authRouter = require("./auth");
 const userRouter = require("./user_manager");
+const AHMG_CARD_Router = require("./ahmg_card_router")
 var db_process = require('./article_process');
 // Variable for controlling news listing page
 //   current/total is the current/total page
@@ -90,6 +91,7 @@ app.use(express.json())
 
 app.use("/", authRouter);
 app.use("/", userRouter);
+app.use("/", AHMG_CARD_Router);
 //Send data to MySQL Server
 
 app.post('/post', function(request, response){
