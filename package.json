@@ -2,7 +2,7 @@
   "name": "wcstudioweb",
   "version": "1.0.0",
   "description": "",
-  "main": "article_process.js",
+  "main": "server.js",
   "dependencies": {
     "bcrypt": "^5.0.1",
     "cookie-parser": "^1.4.5",

@@ -1,9 +1,10 @@
 const express = require("express")
 const router = express.Router()
-const battle_process = require("./battle_history_process");
-const Card = require("./models/cards");
-
-
+const battle_process = require("./battle_history_process")
+const Card = require("./models/cards")
+const auth = require("./auth")
+const UserAccount = require("./models/user")
+const UserInfo = require("./models/user_info")
 
 
 //Match history page
@@ -69,8 +70,29 @@ router.route("/match_detail/:id").get(async (req, res) => {
 
 
 
-  //Route for game client
-  router.route("/ahmg_card_data/send_battle_result").put((req, res) => {
+  //                                                Route for game client
+  router.route("/ahmg_card/login").post(async (req, res) => {
+    user = await UserAccount.findOne({
+      where :{
+        email : req.body.email
+      },
+      attributes : ['id', 'username', 'email', 'password'],
+      include: {
+        model: UserInfo,
+        attributes : ['displayName'],
+      },
+    })
+    if(user && user.validPassword(user, req.body.password)){
+      delete user.password
+      user.toJSON()
+      res.json(user)
+    }
+    else{
+      res.status(404).send("Can't login")
+    }
+  })
+
+  router.route("/ahmg_card/send_battle_result").put((req, res) => {
       console.log(req.body);
       battle_process.uploadBattleData(req.body);
       res.sendStatus(200);
