@@ -7,6 +7,13 @@ body {
     box-sizing: border-box;
   }
   
+  #header {
+    margin-bottom: 50px;
+}
+  #main {
+    background-color: burlywood;
+  }
+
   /* Add padding to containers */
   .container {
     padding: 16px;

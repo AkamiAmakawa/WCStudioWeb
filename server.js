@@ -35,7 +35,7 @@ fs.readdirSync(models)
     require(path.join(models, file))
   })
 
-  // sequelize.sync({alter : true});
+  // sequelize.sync({force : true});
 
 
 

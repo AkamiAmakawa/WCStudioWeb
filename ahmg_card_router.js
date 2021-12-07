@@ -48,7 +48,8 @@ router.route("/match_detail/:id").get(async (req, res) => {
     res.render("card_input", {user: req.session.user});  
   })
   .post((req, res) => {
-      Card.create({
+    if(req.session.user && req.session.user.userInfo.permissionLevel >= 3){
+        Card.create({
           name: req.body.name,
           cost: req.body.cost,
           rank: req.body.rank,
@@ -57,7 +58,9 @@ router.route("/match_detail/:id").get(async (req, res) => {
       }).catch(error => {
           console.log(error)
       })
-      return res.redirect("/")
+    }
+
+    return res.redirect("/")
   })
 
 

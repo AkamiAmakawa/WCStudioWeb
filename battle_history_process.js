@@ -68,14 +68,11 @@ exports.uploadBattleData = async (battle_data) => {
             deck1_id : battle_data.deck1_id,
             deck2_id : battle_data.deck2_id
         }, {transaction: t}).then( async battle => {
-            for await (var move of battle_data.battleMoves) {
-            await BattleMove.create({
-                    move_order : move.order,
-                    turn : move.turn,
-                    card_id : move.card_id,
-                    battle_id : battle.id
-                }, {transaction : t})
+            for (var move of battle_data.battleMoves) {
+                move.move_order = move.order
+                move.battle_id = battle.id
             }
+            await BattleMove.bulkCreate(battle_data.battleMoves, {transaction : t})
         }).then(() => {
             t.commit();
         }).catch(error => {
